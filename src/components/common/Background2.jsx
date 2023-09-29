@@ -8,19 +8,9 @@ import ExploreBg2_3 from "./ExploreBg2_3"
 
 const Background2 = () => {
 
-    const [checkHover, setCheckHover] = useState(false)
-
-    // const handleHover = () => {
-    //     setIsHovered(true);
-    // };
-
-    // const handleLeave = () => {
-    //     setIsHovered(false);
-    // };
-
     return (
         <Box sx={{ position: "relative" }}>
-            <img style={{ width: "100%", height: "1000px", position: "relative" }} src={bg2} />
+            <img style={{ width: "100%", height: "850px", position: "relative" }} src={bg2} />
             <Box sx={{
                 position: "absolute",
                 top: "10%",

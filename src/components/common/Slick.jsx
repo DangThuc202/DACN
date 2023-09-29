@@ -12,22 +12,23 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import heartIcon from "../../image/heartIcon.svg"
 import bannerClinicIcon from "../../image/bannerClinicIcon.svg"
 import bg1 from "../../image/bg1.svg"
-
+import ModalCustomer from './ModalCustomer';
+import { useState } from 'react';
 
 
 const Slick = () => {
 
     const nextSlide = useRef(null)
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         nextSlide.current.slickNext();
-    //     }, 3000);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextSlide.current.slickNext();
+        }, 3000);
 
-    //     return () => {
-    //         clearInterval(interval);
-    //     };
-    // }, []);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
 
     const handleClickNext = () => {
@@ -48,18 +49,25 @@ const Slick = () => {
         borderRadius: "40px"
     }
 
-    const handleClick = () => {
-        alert("abc")
-    }
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
 
     return (
         <Box>
-            <img style={{ position: "absolute" }} src={bg1} />
+            <img style={{ position: "absolute", width: '100%' }} src={bg1} />
             <Box sx={{
                 paddingLeft: "250px",
             }}>
 
-                <Slider ref={nextSlide} style={{ width: "100%", }} {...settings}>
+                <Slider ref={nextSlide} style={{ width: "90%", }} {...settings}>
                     <div>
                         <img style={ImgSide} src={banner01} />
                     </div>
@@ -127,9 +135,10 @@ const Slick = () => {
                                 opacity: "0.7"
                             },
                         }}
+                        onClick={openModal}
                         label="Đặt Hẹn Khám"
-                        onClick={handleClick}
                     />
+                    <ModalCustomer open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
                 </Box>
 
                 <img src={bannerClinicIcon} style={{ position: 'absolute', top: "80%", zIndex: 10, left: "37%" }} />
