@@ -9,6 +9,8 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import ModalCustomer from "./ModalCustomer";
 import { useState, useEffect } from "react";
+import { NavLink } from 'react-router-dom';
+import Bell from "./Bell";
 
 const Header = () => {
 
@@ -88,9 +90,11 @@ const Header = () => {
         >
             <img style={{ padding: "25px", zIndex: 100 }} src={logo} />
             <Stack direction="row" spacing={2} sx={{ marginLeft: "10px" }}>
-                <MidButton variant="text" sx={{ backgroundColor: "#00FFFF" }}> <HomeIcon style={IconStyle} />
-                    Trang Chủ
-                </MidButton>
+                <a href="/">
+                    <MidButton variant="text"> <HomeIcon style={IconStyle} />
+                        Trang Chủ
+                    </MidButton>
+                </a>
                 <MidButton variant="text" > <MedicalServicesIcon style={IconStyle} />
                     Các Dịch Vụ
                 </MidButton>
@@ -99,16 +103,21 @@ const Header = () => {
                         Nhà Thuốc Jio
                     </MidButton>
                 </a>
-                <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
-                    Gói Dịch Vụ
-                </MidButton>
-                <MidButton variant="text" > <PeopleAltIcon style={IconStyle} />
-                    Đội Ngũ Bác Sĩ
-                </MidButton>
+                <a href="/chuyenkhoa">
+                    <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
+                        Chuyên khoa
+                    </MidButton>
+
+                </a>
+                <a href="/doingubacsi">
+                    <MidButton variant="text" > <PeopleAltIcon style={IconStyle} />
+                        Đội Ngũ Bác Sĩ
+                    </MidButton>
+                </a>
                 <MidButton variant="text" > <NewspaperIcon style={IconStyle} />
                     Tin Tức
                 </MidButton>
-                <Button variant="text" >Tin Tức</Button>
+                <Bell />
             </Stack>
             <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Đặt Hẹn Khám Ngay</RightButton>
             <ModalCustomer open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />

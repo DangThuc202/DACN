@@ -24,12 +24,9 @@ const Background3 = () => {
         fontWeight: "600",
     }
 
-    const cirlce = {
-        color: "red"
-    }
 
     return (
-        <Box sx={{ height: "500px", padding: "50px 0 20px 0", display: 'flex', position: "relative", justifyContent: "right" }}>
+        <Box sx={{ height: "500px", padding: "50px 0 20px 0", display: 'flex', justifyContent: "right" }}>
             <Stack direction="row" spacing={3}>
                 <Box sx={{ backgroundColor: "#daf5fb" }} style={boxStyle}>
                     <Typography style={typoStyle} >Bác sĩ <br /> đến nhà</Typography>
@@ -39,10 +36,12 @@ const Background3 = () => {
                     <Typography style={typoStyle} >Nhà thuốc <br /> trực tuyến</Typography>
                     <img src={img2_bg3} />
                 </Box>
-                <Box sx={{ backgroundColor: "#f2ddde" }} style={boxStyle}>
-                    <Typography style={typoStyle} >Tìm bác sĩ</Typography>
-                    <img src={img3_bg3} />
-                </Box>
+                <a href="/doingubacsi">
+                    <Box sx={{ backgroundColor: "#f2ddde" }} style={boxStyle}>
+                        <Typography style={typoStyle} >Tìm bác sĩ</Typography>
+                        <img src={img3_bg3} />
+                    </Box>
+                </a>
                 <Box sx={{ backgroundColor: "#f8fbda" }} style={boxStyle}>
                     <Typography style={typoStyle} >Gói chăm sóc <br /> sức khỏe </Typography>
                     <img src={img4_bg3} />

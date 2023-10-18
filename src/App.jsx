@@ -1,35 +1,28 @@
 import './App.css'
-import HeaderCovid from "./components/common/HeaderCovid"
-import Header from './components/common/Header'
-import Slick from './components/common/Slick'
-import Background2 from './components/common/Background2'
-import Background3 from './components/common/Background3'
-import Background4 from './components/common/Background4'
-import Background5 from './components/common/Background5'
-import Background6 from './components/common/Background6'
-import Background7 from './components/common/Background7'
-import Background8 from './components/common/Background8'
-import Background9 from './components/common/Background9'
-import Footer from './components/common/Footer'
+import HomePage from './pages/HomePage'
+import DoctorPage from "./pages/DoctorPage"
+import SpecialtyPage from './pages/SpecialtyPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signin from "./components/common/Signin"
+
+
+
 
 const App = () => {
   return (
-    <div>
-      <HeaderCovid />
-      <Header />
-      <Slick />
-      <Background2 />
-      <Background3 />
-      <Background4 />
-      <Background5 />
-      <Background6 />
-      <Background7 />
-      <Background8 />
-      <Background9 />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index path='/' element={<HomePage />} />
+          <Route path="chuyenkhoa" element={<SpecialtyPage />} />
+          <Route path="doingubacsi" element={<DoctorPage />} />
+          {/* <Route path="login" element={<DoctorPage />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 
-  )
+
 }
 
 export default App

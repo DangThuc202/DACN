@@ -34,7 +34,6 @@ const ExploreBg2_1 = () => {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 borderRadius: "50px",
-                // position: "absolute"
             }} />
             <Box sx={{ paddingLeft: "14px" }}>
                 <Typography variant="h5" sx={{ padding: "16px 0", fontWeight: 600 }} >M Plaza</Typography>

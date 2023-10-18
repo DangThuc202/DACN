@@ -119,8 +119,8 @@ const Footer = () => {
                             Hãy theo dõi Jio Health tại
                         </Typography>
                         <Stack direction="row" spacing={3} style={{ marginLeft: "70px", cursor: "pointer" }}>
-                            <FacebookOutlinedIcon style={{ fontSize: "50px" }} />
                             <InstagramIcon style={{ fontSize: "50px" }} />
+                            <FacebookOutlinedIcon style={{ fontSize: "50px" }} />
                         </Stack>
                     </Stack>
                 </Box>
