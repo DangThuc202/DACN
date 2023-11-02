@@ -65,6 +65,7 @@ const Slick = () => {
             <img style={{ position: "absolute", width: '100%' }} src={bg1} />
             <Box sx={{
                 paddingLeft: "250px",
+                borderRadius: "40px",
             }}>
 
                 <Slider ref={nextSlide} style={{ width: "90%", }} {...settings}>

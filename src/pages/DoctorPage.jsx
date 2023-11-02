@@ -9,9 +9,13 @@ import Background3 from "../components/common/Background3"
 import Background4 from "../components/common/Background4"
 import Background9 from "../components/common/Background9"
 import Footer from "../components/common/Footer"
+import { useEffect } from "react"
+
 
 const DoctorPage = () => {
-
+    useEffect(() => {
+        document.title = 'Đội ngũ bác sĩ';
+    }, []);
 
 
     return (

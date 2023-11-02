@@ -1,9 +1,10 @@
-import themeModeSlice from "./feartures/themeModeSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import authModalSlice from "./feartures/authModalSlice";
 
-const store = {
+const store = configureStore({
     reducer: {
-        themeMode: themeModeSlice,
-    }
-}
+        authModal: authModalSlice,
+    },
+});
 
-export default store
+export default store;

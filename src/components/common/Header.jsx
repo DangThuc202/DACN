@@ -107,7 +107,6 @@ const Header = () => {
                     <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
                         Chuyên khoa
                     </MidButton>
-
                 </a>
                 <a href="/doingubacsi">
                     <MidButton variant="text" > <PeopleAltIcon style={IconStyle} />

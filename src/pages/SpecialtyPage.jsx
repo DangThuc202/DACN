@@ -9,8 +9,13 @@ import Background4 from "../components/common/Background4"
 import Pay from "../components/common/DoctorPage/Pay"
 import Background9 from "../components/common/Background9"
 import Footer from "../components/common/Footer"
+import { useEffect } from "react"
+
 
 const SpecialtyPage = () => {
+    useEffect(() => {
+        document.title = 'Chuyên Khoa';
+    }, []);
     return (
         <Box>
             <HeaderCovid />

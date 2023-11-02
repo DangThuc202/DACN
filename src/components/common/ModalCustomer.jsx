@@ -42,9 +42,10 @@ const ModalCustomer = ({ open, handleClose }) => {
                 .required("Không được để trống phần này"),
             email: Yup.string().email('Sai định dạng email !')
                 .required("Không được để trống phần này"),
-            address: Yup.string()
-                .required("Không được để trống phần này"),
-        })
+        }),
+        onSubmit: values => {
+            console.log(values);
+        }
     })
 
     return (
@@ -61,40 +62,59 @@ const ModalCustomer = ({ open, handleClose }) => {
                 borderRadius: "20px",
                 fontSize: '16px',
                 width: "600px",
-                height: "680px"
+                height: "580px"
             }}
+                component="form"
+                onSubmit={modalForm.handleSubmit}
             >
                 <Typography sx={{ marginBottom: "20px", display: "flex", justifyContent: "center" }} variant="h5">Đặt lịch khám ngay</Typography>
                 <Stack spacing={4}>
                     <Stack direction="row" spacing={4}>
-                        <TextField sx={{ width: '300px' }} name="firstName" label="Họ " variant="outlined" />
-                        <TextField sx={{ width: '250px' }} name="lastName" label="Tên" variant="outlined" />
-                    </Stack>
-                    <TextField name="address" label="Địa Chỉ" variant="outlined" />
-                    <TextField name="email" label="Email" variant="outlined" />
-                    <TextField name="phoneNumber" label="SĐT" variant="outlined" />
-                    <Stack direction="row" spacing={4}>
-                        <TextField type="date" variant="outlined" helperText="Chọn ngày tháng năm sinh" />
                         <TextField
-                            select
-                            label="Giới tính"
-                            helperText="Chọn giới tính của bạn"
-                        >
-                            {currencies.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                            sx={{ width: '300px' }}
+                            name="firstName"
+                            label="Họ "
+                            variant="outlined"
+                            value={modalForm.values.firstName}
+                            onChange={modalForm.handleChange}
+                        />
+                        <TextField
+                            sx={{ width: '250px' }}
+                            name="lastName"
+                            label="Tên"
+                            variant="outlined"
+                            value={modalForm.values.lastName}
+                            onChange={modalForm.handleChange}
+                        />
                     </Stack>
+                    <TextField
+                        name="address"
+                        label="Địa Chỉ"
+                        variant="outlined"
+                        value={modalForm.values.address}
+                        onChange={modalForm.handleChange}
+                    />
+                    <TextField
+                        name="email"
+                        label="Email"
+                        variant="outlined"
+                        value={modalForm.values.email}
+                        onChange={modalForm.handleChange}
+                    />
+                    <TextField
+                        name="phoneNumber"
+                        label="SĐT"
+                        variant="outlined"
+                        value={modalForm.values.phoneNumber}
+                        onChange={modalForm.handleChange}
+                    />
                     <Stack direction="row" spacing={4}>
                         <TextField type="date" inputProps={{ min: currentDate }} variant="outlined" helperText="Chọn thời gian khám bệnh  &nbsp; " />
                         <TextField type="time" variant="outlined" helperText="Chọn khung giờ khám bệnh " />
                     </Stack>
-                    <Button variant="contained" size="large"> Đăng ký khám </Button>
+                    <Button variant="contained" size="large" type="submit"> Đăng ký khám </Button>
                 </Stack>
             </Box>
-
         </Modal >
     )
 }
