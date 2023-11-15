@@ -2,30 +2,37 @@ import './App.css'
 import HomePage from './pages/HomePage'
 import DoctorPage from "./pages/DoctorPage"
 import SpecialtyPage from './pages/SpecialtyPage';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import AuthModal from './components/common/AuthModal';
-import Login from './components/common/Login';
 import AdminPage from './pages/AdminPage';
-import DoctorAuthPage from "./pages/DoctorAuthPage"
+import { path } from "./utils/constant"
+import ManageDoctor from './components/common/AdminPage/Dashboard/ManageDoctor';
+import ManageClinic from './components/common/AdminPage/Dashboard/ManageClinic';
+import ManagePatient from './components/common/AdminPage/Dashboard/ManagePatient';
+import ManageBooking from './components/common/AdminPage/Dashboard/ManageBooking';
+import ManageDashboard from './components/common/AdminPage/Dashboard/ManageDashboard';
+
 
 const App = () => {
+
   return (
     <BrowserRouter>
-      {/* <Routes>
+      <Routes>
         <Route path="/">
-          <Route index path='/' element={<HomePage />} />
-          <Route path="chuyenkhoa" element={<SpecialtyPage />} />
-          <Route path="doingubacsi" element={<DoctorPage />} />
+          <Route index path={path.HOME} exact element={<HomePage />} />
+          <Route path={path.SPECIALTY} element={<SpecialtyPage />} />
+          <Route path={path.DOCTORS} element={<DoctorPage />} />
+          <Route path={path.LOGIN} element={<AuthModal />} />
+          <Route path={path.ADMIN} element={<ManageDashboard />} />
+          <Route path={path.MANAGEDOCTOR} element={<ManageDoctor />} />
+          <Route path={path.MANAGECLINIC} element={<ManageClinic />} />
+          <Route path={path.MANAGEPATIENT} element={<ManagePatient />} />
+          <Route path={path.MANAGEBOOKING} element={<ManageBooking />} />
         </Route>
-      </Routes> */}
-      {/* <AuthModal /> */}
-      {/* <AdminPage /> */}
-      <DoctorAuthPage />
+      </Routes>
     </BrowserRouter>
 
   );
-
-
 }
 
 export default App

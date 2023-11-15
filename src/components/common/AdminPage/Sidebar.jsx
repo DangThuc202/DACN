@@ -1,131 +1,85 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import { Box, Button, Divider } from '@mui/material';
+import { Box, Stack, Typography, Avatar, List, ListItem, ListItemText, ListItemAvatar, Divider } from "@mui/material"
+import logo from "../../../image/logo.svg"
+import test from "../../../image/test.jpg"
+import PieChartIcon from '@mui/icons-material/PieChart';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import AccessibleIcon from '@mui/icons-material/Accessible';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-const Accordion = styled((props) => (
-    <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
-    '&:not(:last-child)': {
-        borderBottom: 0,
-    },
-    '&:before': {
-        display: 'none',
-    },
-}));
-
-const AccordionSummary = styled((props) => (
-    <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-        {...props}
-    />
-))(({ theme }) => ({
-    backgroundColor:
-        theme.palette.mode === 'dark'
-            ? 'rgba(255, 255, 255, .05)'
-            : 'rgba(0, 0, 0, .03)',
-    flexDirection: 'row-reverse',
-    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-        transform: 'rotate(90deg)',
-    },
-    '& .MuiAccordionSummary-content': {
-        marginLeft: theme.spacing(1),
-    },
-}));
-
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-    padding: theme.spacing(2),
-    borderTop: '1px solid rgba(0, 0, 0, .125)',
-}));
-
-const boxStyle = {
-    padding: "16px 40px ",
-    fontSize: "1.1rem",
-    color: "black",
-    '&:hover': {
-        backgroundColor: "#cccccc",
-    }
-}
-
-const linkStyle = {
-    textDecoration: "none",
-    color: "black"
-}
 
 const Sidebar = () => {
-    const [expanded, setExpanded] = React.useState('panel');
-
-    const handleChange = (panel) => (event, newExpanded) => {
-        setExpanded(newExpanded ? panel : false);
-    };
 
     return (
         <Box sx={{
-            width: "20%"
+            position: "relative",
+            width: "320px",
+            height: "100vh",
+            border: "2px solid #00000024",
+            textAlign: "center",
+            paddingTop: "20px",
         }}>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>Quản lý bác sĩ</Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ display: "contents" }}>
-                    <a href='/create'>
-                        <Box sx={boxStyle}>Tạo thông tin bác sĩ</Box>
-                    </a>
-                    <Divider />
-                    <a href='/edit'>
-                        <Box sx={boxStyle}>Sửa thông tin bác sĩ</Box>
-                    </a>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>Quản lý bệnh nhân</Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ display: "contents" }}>
-                    <a href='/patient-info'>
-                        <Box sx={boxStyle}>Thông tin bệnh nhân</Box>
-                    </a>
-                    <Divider />
-                    <a href='/patient-calendar'>
-                        <Box sx={boxStyle}>Quản lý đặt lịch khám bệnh nhân</Box>
-                    </a>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>Quản lý thời gian biểu</Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ display: "contents" }}>
-                    <a href='/doctor-shift'>
-                        <Box sx={boxStyle}>Quản lý ca làm của bác sĩ</Box>
-                    </a>
-                    <Divider />
-                    <a href='/doctor-busy'>
-                        <Box sx={boxStyle}>Quản lý lịch bận của bác sĩ</Box>
-                    </a>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>Quản lý chuyên khoa</Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ display: "contents" }}>
-                    <a href='/create'>
-                        <Box sx={boxStyle}>Thông tin chuyên khoa</Box>
-                    </a>
-                    <Divider />
-                    <a href='/edit'>
-                        <Box sx={boxStyle}>Thông tin bác sĩ ở từng chuyên khoa</Box>
-                    </a>
-                </AccordionDetails>
-            </Accordion>
+            <img src={logo} />
+            <Box sx={{
+                width: "auto",
+                backgroundColor: "#00000026",
+                borderRadius: "20px",
+                marginTop: "20px",
+                display: "flex",
+                padding: "10px 30px",
+                textAlign: "center",
+                margin: "50px 20px"
+            }}>
+                <Avatar alt="Remy Sharp" src={test} style={{ height: "50px", width: "50px" }} />
+                <Stack spacing={0.5} sx={{
+                    display: 'flex',
+                    justifyContent: "center",
+                    marginLeft: "40px",
+                }}
+                >
+                    <Typography sx={{ fontWeight: "700" }}>Thức - Nghĩa</Typography>
+                    <Typography sx={{ color: "#00000073", fontWeight: "700" }}>ADMIN</Typography>
+                </Stack>
+            </Box>
+            <List component="nav" aria-label="mailbox folders" sx={{ padding: "0 30px" }}>
+                <a href="/admin/thongke">
+                    <ListItem button>
+                        <PieChartIcon />
+                        <ListItemText sx={{ marginLeft: "30px" }} primary="Thống kê" />
+                    </ListItem>
+                </a>
+                <Divider />
+                <a href="/admin/quanlybacsi">
+                    <ListItem button>
+                        <PeopleAltIcon />
+                        <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý bác sĩ" />
+                    </ListItem>
+                </a>
+                <Divider />
+                <a href="/admin/quanlychuyenkhoa">
+                    <ListItem button>
+                        <LocalHospitalIcon />
+                        <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý chuyên khoa" />
+                    </ListItem>
+                </a>
+                <Divider light />
+                <a href="/admin/quanlybenhnhan">
+                    <ListItem button>
+                        <AccessibleIcon />
+                        <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý bệnh nhân" />
+                    </ListItem>
+                </a>
+                <Divider />
+                <a href="/admin/quanlydatlich">
+                    <ListItem button>
+                        <CalendarMonthIcon />
+                        <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý đặt lịch" />
+                    </ListItem>
+                </a>
+                <Divider />
+            </List>
         </Box>
-    );
+    )
 }
 
 export default Sidebar

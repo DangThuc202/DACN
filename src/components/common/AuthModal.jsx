@@ -5,6 +5,7 @@ import { setAuthModalOpen } from "../../redux/feartures/authModalSlice";
 import Login from "./Login";
 import ChangePassword from "./ChangePassword";
 import bg1 from "../../image/bg1.svg";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const actionStates = {
     login: "login",
@@ -32,6 +33,13 @@ const AuthModal = () => {
             width: "100%",
             minHeight: "100vh"
         }}>
+            <a href="/" style={{ position: "static" }}>
+                <LogoutIcon sx={{
+                    position: 'absolute',
+                    top: 25,
+                    right: 30,
+                }} />
+            </a>
             <Box
                 sx={{
                     position: "absolute",
@@ -41,8 +49,6 @@ const AuthModal = () => {
                     maxWidth: "600px",
                     padding: 4,
                     outline: "none",
-
-
                 }}
             >
                 <Box

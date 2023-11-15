@@ -7,10 +7,11 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
-import ModalCustomer from "./ModalCustomer";
+import ModalCustomer2 from "./ModalCustomer2";
 import { useState, useEffect } from "react";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Bell from "./Bell";
+import LoginIcon from '@mui/icons-material/Login';
 
 const Header = () => {
 
@@ -118,8 +119,8 @@ const Header = () => {
                 </MidButton>
                 <Bell />
             </Stack>
-            <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Đặt Hẹn Khám Ngay</RightButton>
-            <ModalCustomer open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
+            <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Tư Vấn Sức Khỏe Ngay</RightButton>
+            <ModalCustomer2 open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
             <RightButton variant="contained" sx={{ backgroundColor: "#2320D4" }} >Tải Ứng Dụng Ngay</RightButton>
         </Box>
 

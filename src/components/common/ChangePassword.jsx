@@ -2,11 +2,7 @@ import { Alert, Box, Button, Stack, TextField, Typography } from "@mui/material"
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import * as Yup from "yup";
-// import userApi from "../../api/modules/user.api";
-// import { setAuthModalOpen } from "../../redux/feartures/authModalSlice";
-// import { setUser } from "../../redux/feartures/userSlice";
 
 const ChangePassword = ({ switchAuthState }) => {
     const dispatch = useDispatch();

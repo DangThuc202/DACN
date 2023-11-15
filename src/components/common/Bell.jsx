@@ -48,39 +48,6 @@ const Bell = () => {
             onMouseLeave={handleLeave}
         >
             <NotificationsActiveIcon />
-            {/* {showNotification && (
-                <Box sx={{
-                    height: "auto",
-                    width: "460px",
-                    position: "absolute",
-                    top: "120%",
-                    backgroundColor: "white",
-                    right: -30,
-                    padding: "30px ",
-                    boxShadow: ' rgb(0, 0, 0) 5px 11px 33px',
-                    '&:after': {
-                        cursor: "pointer",
-                    },
-
-                }}>
-                    <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}>
-                        <img style={{ width: "150px", marginBottom: "10px" }} src={bell_img} />
-                        <Typography variant="h6">Bạn không có thông báo nào !!!</Typography>
-                    </Box>
-                    <Box sx={{
-                        position: 'absolute',
-                        top: '-39px',
-                        right: "22px",
-                        borderWidth: "20px",
-                        borderStyle: "solid",
-                        borderColor: "transparent transparent white transparent"
-                    }} />
-                </Box>
-            )} */}
             {showNotification && (
                 <Box sx={{
                     height: "auto",
