@@ -14,8 +14,8 @@ import { useEffect } from "react"
 
 const DoctorPage = () => {
     useEffect(() => {
-        document.title = 'Đội ngũ bác sĩ';
-    }, []);
+        document.title = 'Đội ngũ bác sĩ'
+    }, [])
 
 
     return (

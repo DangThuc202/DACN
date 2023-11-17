@@ -1,16 +1,17 @@
 import './App.css'
 import HomePage from './pages/HomePage'
 import DoctorPage from "./pages/DoctorPage"
-import SpecialtyPage from './pages/SpecialtyPage';
-import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import AuthModal from './components/common/AuthModal';
-import AdminPage from './pages/AdminPage';
+import SpecialtyPage from './pages/SpecialtyPage'
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import AuthModal from './components/common/AuthModal'
+import AdminPage from './pages/AdminPage'
 import { path } from "./utils/constant"
-import ManageDoctor from './components/common/AdminPage/Dashboard/ManageDoctor';
-import ManageClinic from './components/common/AdminPage/Dashboard/ManageClinic';
-import ManagePatient from './components/common/AdminPage/Dashboard/ManagePatient';
-import ManageBooking from './components/common/AdminPage/Dashboard/ManageBooking';
-import ManageDashboard from './components/common/AdminPage/Dashboard/ManageDashboard';
+import ManageDoctor from './components/common/AdminPage/Dashboard/ManageDoctor'
+import ManageClinic from './components/common/AdminPage/Dashboard/ManageClinic'
+import ManagePatient from './components/common/AdminPage/Dashboard/ManagePatient'
+import ManageBooking from './components/common/AdminPage/Dashboard/ManageBooking'
+import ManageDashboard from './components/common/AdminPage/Dashboard/ManageDashboard'
+import Register from './components/common/Register'
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
           <Route path={path.SPECIALTY} element={<SpecialtyPage />} />
           <Route path={path.DOCTORS} element={<DoctorPage />} />
           <Route path={path.LOGIN} element={<AuthModal />} />
+          <Route path={path.REGISTER} element={<Register />} />
           <Route path={path.ADMIN} element={<ManageDashboard />} />
           <Route path={path.MANAGEDOCTOR} element={<ManageDoctor />} />
           <Route path={path.MANAGECLINIC} element={<ManageClinic />} />
@@ -32,7 +34,7 @@ const App = () => {
       </Routes>
     </BrowserRouter>
 
-  );
+  )
 }
 
 export default App

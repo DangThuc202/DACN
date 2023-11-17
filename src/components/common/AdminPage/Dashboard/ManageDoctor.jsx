@@ -1,119 +1,117 @@
-import React from 'react'
-import { Box, Button, Stack, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import {
+    Box, Button, Typography, Paper, TextField, IconButton,
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Modal, Backdrop, Fade
+} from '@mui/material'
 import Sidebar from '../Sidebar'
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { type } from '@testing-library/user-event/dist/type';
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import axios from 'axios'
 
 const ManageDoctor = () => {
+    const [doctors, setDoctors] = useState([])
+    const [searchTerm, setSearchTerm] = useState('')
+    const [openModal, setOpenModal] = useState(false)
+    const [editingDoctor, setEditingDoctor] = useState(null)
+    const [imagePreview, setImagePreview] = useState(null)
 
-    const gender = {
+    useEffect(() => {
+        // Fetch data
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/api/doctors')
+                setDoctors(response.data.data)
+            } catch (error) {
+                console.error('Error fetching data: ', error)
+            }
+        }
+        fetchData()
+    }, [])
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value)
     }
 
-    const createForm = useFormik({
-        initialValues: {
-            lastName: "",
-            firstName: "",
-            address: "",
-            email: "",
+    // const filteredDoctors = doctors.filter(doctor =>
+    //     doctor.specialty.toLowerCase().includes(searchTerm.toLowerCase())
+    // )
 
-        },
-        validationSchema: Yup.object({
-            lastName: Yup.string()
-                .min(0, "Họ tên lót không được để trống")
-                .required("Trường này là bắt buộc"),
-            firstName: Yup.string()
-                .min(0, "Tên không được để trống")
-                .required("Trường này là bắt buộc"),
-            address: Yup.string()
-                .min(0, "Địa chỉ không được để trống")
-                .required("Trường này là bắt buộc"),
-            email: Yup.string().email('Sai định dạng email !')
-                .min(0, "Email không được để trống")
-                .required("Trường này là bắt buộc"),
-        }),
-        onSubmit: values => {
-            console.log(values);
-        }
-    });
+    // ... other handler functions (e.g., handleEditClick, handleCloseModal)
 
     return (
-        <Box display="flex">
+        <Box sx={{ display: 'flex', width: '100%' }}>
             <Sidebar />
-            <Box
-                sx={{
-                    width: "calc(100% - 300px)",
-                    padding: "30px 50px 0 50px"
-                }}
-                component="form"
-                onSubmit={createForm.handleSubmit}
-            >
-                <Typography variant='h4' textAlign="center" mb={5}>Tạo Thông Tin Bác Sĩ</Typography>
-                <Stack spacing={4}>
-                    <Stack direction="row" spacing={4}>
-                        <TextField
-                            type='text'
-                            label="Họ tên lót"
-                            variant="outlined"
-                            fullWidth
-                            name='lastName'
-                            value={createForm.values.lastName}
-                            onChange={createForm.handleChange}
-                            error={
-                                createForm.touched.lastName &&
-                                createForm.errors.lastName !== undefined
-                            }
-                            helperText={createForm.touched.lastName && createForm.errors.lastName}
-                        />
-                        <TextField
-                            type='text'
-                            label="Tên"
-                            variant="outlined"
-                            fullWidth
-                            name='firstName'
-                            value={createForm.values.firstName}
-                            onChange={createForm.handleChange}
-                            error={
-                                createForm.touched.firstName &&
-                                createForm.errors.firstName !== undefined
-                            }
-                            helperText={createForm.touched.firstName && createForm.errors.firstName}
-                        />
-                    </Stack>
-                    <Stack direction="row" spacing={4}>
-                        <TextField
-                            type='text'
-                            label="Địa chỉ"
-                            variant="outlined"
-                            fullWidth
-                            name='address'
-                            value={createForm.values.address}
-                            onChange={createForm.handleChange}
-                            error={
-                                createForm.touched.address &&
-                                createForm.errors.address !== undefined
-                            }
-                            helperText={createForm.touched.address && createForm.errors.address}
-                        />
-                        <TextField
-                            type='email'
-                            label="Email"
-                            variant="outlined"
-                            fullWidth
-                            name='email'
-                            value={createForm.values.email}
-                            onChange={createForm.handleChange}
-                            error={
-                                createForm.touched.email &&
-                                createForm.errors.email !== undefined
-                            }
-                            helperText={createForm.touched.email && createForm.errors.email}
-                        />
-                    </Stack>
-                    <Button type='submit' variant='contained'>Tạo thông tin</Button>
-                </Stack>
+            <Box sx={{ flex: 1, margin: '0 16px', display: 'flex', flexDirection: 'column' }}>
+                {/* Header */}
+                <Box sx={{ alignSelf: 'center', mb: 3 }}>
+                    <Typography variant="h5" align="center" sx={{ fontWeight: 'bold' }}>
+                        QUẢN LÝ THÔNG TIN BÁC SĨ
+                    </Typography>
+                </Box>
+
+                {/* Search and Add Button */}
+                <Paper sx={{ p: 2, mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <TextField
+                        id="search"
+                        label="Tên chuyên khoa"
+                        variant="outlined"
+                        size="small"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
+                    <Button variant="contained" color="primary">
+                        Thêm
+                    </Button>
+                </Paper>
+
+                {/* Doctors Table */}
+                <TableContainer component={Paper} sx={{ maxHeight: '500px', overflow: 'auto' }}>
+                    <Table stickyHeader sx={{ minWidth: 650 }} aria-label="customized table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>#</TableCell>
+                                <TableCell>Avatar</TableCell>
+                                <TableCell>Họ tên</TableCell>
+                                <TableCell align='center'>Chức vụ</TableCell>
+                                <TableCell align="right">Chuyên khoa</TableCell>
+                                <TableCell align="right">Phòng khám</TableCell>
+                                <TableCell align="right">Địa chỉ</TableCell>
+                                <TableCell align="right">Hành động</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {doctors.map((doctor, index) => (
+                                <TableRow key={doctor._id}>
+                                    <TableCell component="th" scope="row">
+                                        {index + 1}
+                                    </TableCell>
+                                    <TableCell>
+                                        <img src={doctor.avatar} alt={doctor.name} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {doctor.name}
+                                    </TableCell>
+                                    <TableCell align="center">{doctor.position}</TableCell>
+                                    <TableCell align="right">{doctor.specialty}</TableCell>
+                                    <TableCell align="right">{doctor.clinic}</TableCell>
+                                    <TableCell align="right">{doctor.address}</TableCell>
+                                    <TableCell align="right">
+                                        <IconButton>
+                                            <EditIcon />
+                                        </IconButton>
+                                        <IconButton>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                {/* ... Modal for editing doctor details ... */}
             </Box>
-        </Box>
+        </Box >
     )
 }
 

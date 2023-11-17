@@ -1,11 +1,11 @@
-import { Box, Stack, Typography, Avatar, List, ListItem, ListItemText, ListItemAvatar, Divider } from "@mui/material"
+import { Box, Stack, Typography, Avatar, List, ListItem, ListItemIcon, ListItemText, Divider } from "@mui/material"
 import logo from "../../../image/logo.svg"
 import test from "../../../image/test.jpg"
-import PieChartIcon from '@mui/icons-material/PieChart';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import AccessibleIcon from '@mui/icons-material/Accessible';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PieChartIcon from '@mui/icons-material/PieChart'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
+import AccessibleIcon from '@mui/icons-material/Accessible'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 
 
 const Sidebar = () => {
@@ -42,28 +42,28 @@ const Sidebar = () => {
                 </Stack>
             </Box>
             <List component="nav" aria-label="mailbox folders" sx={{ padding: "0 30px" }}>
-                <a href="/admin/thongke">
+                <a href="/admin/dashboard">
                     <ListItem button>
                         <PieChartIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Thống kê" />
                     </ListItem>
                 </a>
                 <Divider />
-                <a href="/admin/quanlybacsi">
+                <a href="/admin/manage-doctor">
                     <ListItem button>
                         <PeopleAltIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý bác sĩ" />
                     </ListItem>
                 </a>
                 <Divider />
-                <a href="/admin/quanlychuyenkhoa">
+                <a href="/admin/manage-clinic">
                     <ListItem button>
                         <LocalHospitalIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý chuyên khoa" />
                     </ListItem>
                 </a>
                 <Divider light />
-                <a href="/admin/quanlybenhnhan">
+                <a href="/admin/manage-patient">
                     <ListItem button>
                         <AccessibleIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý bệnh nhân" />
@@ -74,6 +74,14 @@ const Sidebar = () => {
                     <ListItem button>
                         <CalendarMonthIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý đặt lịch" />
+                    </ListItem>
+                </a>
+                <Divider />
+                <Divider />
+                <a href="/admin/durg">
+                    <ListItem button>
+                        <CalendarMonthIcon />
+                        <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý thuốc" />
                     </ListItem>
                 </a>
                 <Divider />

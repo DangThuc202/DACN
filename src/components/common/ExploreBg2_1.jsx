@@ -1,10 +1,21 @@
 import { Box, Typography, Button } from "@mui/material"
 import explore1 from "../../image/explore1.jpg"
-import PlaceIcon from '@mui/icons-material/Place';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import PlaceIcon from '@mui/icons-material/Place'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const ExploreBg2_1 = () => {
-
+    const [data, setData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/clinic/655472b0cb2b79c7b39279fc')
+            .then(response => {
+                setData(response.data.data)
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error)
+            })
+    }, [])
     const BtnStyle = {
         height: "auto",
         width: "auto",
@@ -36,8 +47,9 @@ const ExploreBg2_1 = () => {
                 borderRadius: "50px",
             }} />
             <Box sx={{ paddingLeft: "14px" }}>
-                <Typography variant="h5" sx={{ padding: "16px 0", fontWeight: 600 }} >M Plaza</Typography>
-
+                <Typography variant="h5" sx={{ padding: "16px 0", fontWeight: 600 }} >
+                    {data ? data.name : 'Loading...'}
+                </Typography>
                 <Typography sx={{
                     fontSize: "18px",
                     marginBottom: "12px",
@@ -45,7 +57,7 @@ const ExploreBg2_1 = () => {
                 }}
                 >
                     <PlaceIcon style={{ color: "red", marginRight: "4px", fontSize: "18px" }} />
-                    Tầng 1, M Plaza -39 Lê Duẩn, Bến <br /> Nghé, Quận 1, TP.HCM
+                    {data ? data.address : 'Loading...'}
                 </Typography>
 
                 <Typography sx={{

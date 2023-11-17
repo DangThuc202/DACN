@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Unstable_Grid2';
+import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Unstable_Grid2'
 import test from "../../../image/test.jpg"
 import bgDoctor from "../../../image/DoctorPage_img/bgDoctor.svg"
-import { Typography } from '@mui/material';
+import { Typography } from '@mui/material'
 import place from "../../../image/DoctorPage_img/place.svg"
 import exp from "../../../image/DoctorPage_img/exp.svg"
 
@@ -68,7 +68,6 @@ const HeroSlide = () => {
                                     Bệnh Viện Đại Học Y Dược Thành Phố Hồ Chí Minh <br />
                                     Bệnh Viện Chợ Rẫy
                                 </Typography>
-
                             </Box>
                         </Box>
                         <Box backgroundColor="rgb(213 237 250)" sx={contentStyle}>
@@ -88,7 +87,7 @@ const HeroSlide = () => {
 
             </Grid>
         </Box>
-    );
+    )
 }
 
 export default HeroSlide
