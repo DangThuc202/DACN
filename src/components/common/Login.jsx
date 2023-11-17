@@ -1,17 +1,17 @@
-import { Alert, Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useFormik } from "formik";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import * as Yup from "yup";
+import { Alert, Box, Button, Stack, TextField, Typography } from "@mui/material"
+import { useFormik } from "formik"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import * as Yup from "yup"
 // import userApi from "../../api/modules/user.api";
 // import { setAuthModalOpen } from "../../redux/feartures/authModalSlice";
 // import { setUser } from "../../redux/feartures/userSlice";
 
 const Login = ({ switchAuthState }) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const [isLoginRequest, setIsLoginRequest] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
+    const [isLoginRequest, setIsLoginRequest] = useState(false)
+    const [errorMessage, setErrorMessage] = useState()
 
     const login = useFormik({
         initialValues: {
@@ -27,9 +27,9 @@ const Login = ({ switchAuthState }) => {
                 .required("Trường này là bắt buộc"),
         }),
         onSubmit: values => {
-            console.log(values);
+            console.log(values)
         }
-    });
+    })
 
     return (
         <Box component="form" onSubmit={login.handleSubmit}>
@@ -44,7 +44,7 @@ const Login = ({ switchAuthState }) => {
                 </Typography>
                 <TextField
                     type="text"
-                    placeholder="Tên đăng nhập"
+                    placeholder="Email"
                     name="username"
                     fullWidth
                     value={login.values.username}
@@ -91,7 +91,7 @@ const Login = ({ switchAuthState }) => {
                 </Box>
             )}
         </Box>
-    );
-};
+    )
+}
 
-export default Login;
+export default Login
