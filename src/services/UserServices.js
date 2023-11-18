@@ -1,7 +1,14 @@
 import axios from "axios"
-
-const HandleLoginApi = (email, password) => {
-    return axios.post("", email, password)
+const BASE_URL = 'http://localhost:3001/api'
+const loginService = async (email, password) => {
+    try {
+        const respone = await axios.post(`${BASE_URL}/login`, { email, password })
+        console.log(respone)
+        return respone.data
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
 }
 
 const CreateUser = (data) => {
@@ -15,14 +22,21 @@ const DeleteUser = (id) => {
 const UpdateUser = (id) => {
     return axios.put
 }
-const RegiserUser = async (data) => {
-    return await axios.post('http://localhost:3001/api/register', data)
+const registerUser = async (fromData) => {
+    try {
+        const respone = await axios.post(`${BASE_URL}/register`, fromData)
+        console.log(respone)
+        return respone
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
 }
 
 export default {
-    HandleLoginApi,
+    loginService,
     CreateUser,
     DeleteUser,
     UpdateUser,
-    RegiserUser
+    registerUser
 }
