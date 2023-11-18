@@ -7,6 +7,7 @@ import place from "../../../image/DoctorPage_img/place.svg"
 import exp from "../../../image/DoctorPage_img/exp.svg"
 import { useEffect, useState } from 'react'
 import Search from './Search'
+import { Link } from 'react-router-dom'
 
 const HeroSlide = () => {
     const [doctors, setDoctors] = useState([])
@@ -81,21 +82,26 @@ const HeroSlide = () => {
                                 textAlign: "center",
                                 marginTop: "30px"
                             }}>
-                                <Typography variant='h6'>{`${doctor.user_id.first_name} ${doctor.user_id.last_name}`}</Typography>
-                                <Typography>{doctor.specialty_id.name}</Typography>
+                                <Link to={`/doingubacsi/${doctor._id}`}>
+                                    <Typography variant='h6'>{`${doctor.user_id.first_name} ${doctor.user_id.last_name}`}</Typography>
+                                    <Typography>{doctor.specialty_id.name}</Typography>
+                                </Link>
                             </Box>
                             <Box backgroundColor="rgb(227 245 233)" sx={contentStyle}>
                                 <Box sx={iconStyle}>
                                     <img style={{ width: "30px" }} src={place} />
                                 </Box>
                                 <Box sx={{ width: "260px" }}>
+
                                     <Typography>
                                         {`${doctor.clinic_id.name}`}
                                         <Typography>
                                             {doctor.user_id.address && <><br />{doctor.user_id.address}<br /></>}
                                         </Typography>
                                     </Typography>
+
                                 </Box>
+
                             </Box>
                             <Box backgroundColor="rgb(213 237 250)" sx={contentStyle}>
                                 <Box sx={iconStyle}>
@@ -109,9 +115,10 @@ const HeroSlide = () => {
                             </Box>
                         </Box>
                     </Grid>
+
                 ))}
             </Grid>
-        </Box>
+        </Box >
     )
 }
 

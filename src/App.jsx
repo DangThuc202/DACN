@@ -29,7 +29,7 @@ const App = () => {
           <Route path={path.MANAGECLINIC} element={<ManageClinic />} />
           <Route path={path.MANAGEPATIENT} element={<ManagePatient />} />
           <Route path={path.MANAGEBOOKING} element={<ManageBooking />} />
-          <Route path={path.DOCTORDETAIL} element={<DoctorDetailPage />} />
+          <Route path={path.DOCTOR_DETAIL} element={<DoctorDetailPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
