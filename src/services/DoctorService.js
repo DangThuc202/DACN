@@ -1,4 +1,4 @@
-const { default: axios } = require("axios")
+const axios = require("axios")
 
 const BASE_URL = 'http://localhost:3001/api'
 const getDoctors = async () => {

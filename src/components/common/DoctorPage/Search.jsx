@@ -3,12 +3,10 @@ import SearchIcon from '@mui/icons-material/Search'
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-const Search = ({ onSearch }) => {
+const Search = ({ onChangeSearch }) => {
     const [specialties, setSpecialties] = useState([])
     const [selectedSpecialty, setSelectedSpecialty] = useState('')
-    const handleInputChange = (event) => {
-        onSearch(event.target.value)
-    }
+
     const textStyle = {
         height: "50px",
         width: "420px",
@@ -33,8 +31,8 @@ const Search = ({ onSearch }) => {
                             <SearchIcon style={{ color: "#2FC1A6", fontSize: "30px", fontWeight: "800" }} />
                         ),
                     }}
+                    onChange={(e) => onChangeSearch(e.target.value)}
                     style={textStyle}
-                    onChange={handleInputChange}
                 />
                 <FormControl style={textStyle}>
                     <InputLabel id="specialty-select-label">Chuyên khoa</InputLabel>

@@ -9,34 +9,17 @@ import Background3 from "../components/common/Background3"
 import Background4 from "../components/common/Background4"
 import Background9 from "../components/common/Background9"
 import Footer from "../components/common/Footer"
-import { useEffect, useState } from "react"
-import axios from "axios"
+
 
 
 const DoctorPage = () => {
-    const [searchResults, setSearchResults] = useState([])
-
-    const handleSearch = async (searchTerm) => {
-        try {
-            const response = await axios.get(`http://localhost:3001/api/doctor/search?keyword=${searchTerm}`)
-            setSearchResults(response.data.data)
-        } catch (error) {
-            console.error('Error while fetching doctors:', error)
-        }
-    }
-    useEffect(() => {
-        document.title = 'Đội ngũ bác sĩ'
-    }, [])
-
-
     return (
         <Box sx={{ cursor: "pointer" }}>
             <HeaderCovid />
             <Header />
             <Slide />
             <Box margin="0 146px" position="relative" bottom="100px">
-                <Search onSearch={handleSearch} />
-                <HeroSlide results={searchResults} />
+                <HeroSlide />
             </Box>
             <Background3 />
             <Background4 />
