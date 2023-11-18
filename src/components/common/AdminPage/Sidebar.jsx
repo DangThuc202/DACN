@@ -7,7 +7,6 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import AccessibleIcon from '@mui/icons-material/Accessible'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 
-
 const Sidebar = () => {
 
     return (

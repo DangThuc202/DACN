@@ -1,6 +1,6 @@
 export const path = {
     HOME: '/',
-    LOGIN: '/dangnhap-doimatkhau',
+    LOGIN: '/login',
     REGISTER: '/register',
     SYSTEM: '/hethong',
     SPECIALTY: '/chuyenkhoa',
