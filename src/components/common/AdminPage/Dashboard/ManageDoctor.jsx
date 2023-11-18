@@ -31,13 +31,6 @@ const ManageDoctor = () => {
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value)
     }
-
-    // const filteredDoctors = doctors.filter(doctor =>
-    //     doctor.specialty.toLowerCase().includes(searchTerm.toLowerCase())
-    // )
-
-    // ... other handler functions (e.g., handleEditClick, handleCloseModal)
-
     return (
         <Box sx={{ display: 'flex', width: '100%' }}>
             <Sidebar />
