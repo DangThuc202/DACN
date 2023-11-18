@@ -5,6 +5,7 @@ export const path = {
     SYSTEM: '/hethong',
     SPECIALTY: '/chuyenkhoa',
     DOCTORS: '/doingubacsi',
+    DOCTOR_DETAIL: '/doingubacsi/:id',
     ADMIN: '/admin/dashboard',
     MANAGEDOCTOR: '/admin/manage-doctor',
     MANAGECLINIC: '/admin/manage-clinic',
