@@ -6,9 +6,10 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import AccessibleIcon from '@mui/icons-material/Accessible'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import { Link, useNavigate } from "react-router-dom"
 
 const Sidebar = () => {
-
+    const navigate = useNavigate()
     return (
         <Box sx={{
             position: "relative",
@@ -41,48 +42,48 @@ const Sidebar = () => {
                 </Stack>
             </Box>
             <List component="nav" aria-label="mailbox folders" sx={{ padding: "0 30px" }}>
-                <a href="/admin/dashboard">
+                <Link to="/admin/dashboard" onChange={() => navigate('/admin/dashboard')}>
                     <ListItem button>
                         <PieChartIcon />
-                        <ListItemText sx={{ marginLeft: "30px" }} primary="Thống kê" />
+                        <ListItemText sx={{ marginLeft: "30px" }} primary="Thống kê" to="/admin/dashboard" onChange={() => navigate('/admin/dashboard')} />
                     </ListItem>
-                </a>
+                </Link>
                 <Divider />
-                <a href="/admin/manage-doctor">
-                    <ListItem button>
+                <Link to="/admin/manage-doctor" onChange={() => navigate('/admin/manage-doctor')}>
+                    <ListItem button >
                         <PeopleAltIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý bác sĩ" />
                     </ListItem>
-                </a>
+                </Link>
                 <Divider />
-                <a href="/admin/manage-clinic">
+                <Link to="/admin/manage-clinic" onChange={() => navigate("/admin/manage-clinic")}>
                     <ListItem button>
                         <LocalHospitalIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý chuyên khoa" />
                     </ListItem>
-                </a>
+                </Link>
                 <Divider light />
-                <a href="/admin/manage-patient">
+                <Link to="/admin/manage-patient" onChange={() => navigate("/admin/manage-patient")}>
                     <ListItem button>
                         <AccessibleIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý bệnh nhân" />
                     </ListItem>
-                </a>
+                </Link>
                 <Divider />
-                <a href="/admin/quanlydatlich">
+                <Link to="/admin/quanlydatlich" onChange={() => navigate("/admin/quanlydatlich")}>
                     <ListItem button>
                         <CalendarMonthIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý đặt lịch" />
                     </ListItem>
-                </a>
+                </Link>
                 <Divider />
                 <Divider />
-                <a href="/admin/durg">
+                <Link to="/admin/durg" onChange={() => navigate("/admin/durg")}>
                     <ListItem button>
                         <CalendarMonthIcon />
                         <ListItemText sx={{ marginLeft: "30px" }} primary="Quản lý thuốc" />
                     </ListItem>
-                </a>
+                </Link>
                 <Divider />
             </List>
         </Box>
