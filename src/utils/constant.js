@@ -12,3 +12,5 @@ export const path = {
     MANAGEPATIENT: '/admin/manage-patient',
     MANAGEBOOKING: '/admin/quanlydatlich',
 }
+
+    DETAILDOCTOR: '/thongtinbacsi'

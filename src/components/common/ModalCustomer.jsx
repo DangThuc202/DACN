@@ -1,23 +1,9 @@
-import { Box, Modal, Typography, TextField, Stack, MenuItem, Button } from "@mui/material"
+import { Box, Modal, Typography, TextField, Stack, Button, Avatar } from "@mui/material"
 import { useFormik } from "formik";
 import * as Yup from "yup"
+import test from "../../image/test.jpg"
 
 const ModalCustomer = ({ open, handleClose }) => {
-
-    const currencies = [
-        {
-            value: 0,
-            label: 'Nam'
-        },
-        {
-            value: 1,
-            label: 'Nữ'
-        },
-        {
-            value: 2,
-            label: 'Khác'
-        }
-    ]
 
     const today = new Date()
     const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
@@ -68,6 +54,13 @@ const ModalCustomer = ({ open, handleClose }) => {
                 onSubmit={modalForm.handleSubmit}
             >
                 <Typography sx={{ marginBottom: "20px", display: "flex", justifyContent: "center" }} variant="h5">Đặt lịch khám ngay</Typography>
+                <Box display="flex" mb={3}>
+                    <Avatar sx={{ width: "60px", height: "60px" }} src={test} />
+                    <Stack sx={{ display: "flex", justifyContent: "center", ml: "20px" }}>
+                        <Typography>BS.<strong>Đặng Hoàng Thức</strong></Typography>
+                        <Typography>Chuyên khoa <strong>Cơ xương khớp</strong> </Typography>
+                    </Stack>
+                </Box>
                 <Stack spacing={4}>
                     <Stack direction="row" spacing={4}>
                         <TextField
@@ -87,6 +80,24 @@ const ModalCustomer = ({ open, handleClose }) => {
                             onChange={modalForm.handleChange}
                         />
                     </Stack>
+                    <Stack direction="row" spacing={4}>
+                        <TextField
+                            sx={{ width: '300px' }}
+                            name="email"
+                            label="Email"
+                            variant="outlined"
+                            value={modalForm.values.email}
+                            onChange={modalForm.handleChange}
+                        />
+                        <TextField
+                            sx={{ width: '250px' }}
+                            name="phoneNumber"
+                            label="SĐT"
+                            variant="outlined"
+                            value={modalForm.values.phoneNumber}
+                            onChange={modalForm.handleChange}
+                        />
+                    </Stack>
                     <TextField
                         name="address"
                         label="Địa Chỉ"
@@ -94,20 +105,7 @@ const ModalCustomer = ({ open, handleClose }) => {
                         value={modalForm.values.address}
                         onChange={modalForm.handleChange}
                     />
-                    <TextField
-                        name="email"
-                        label="Email"
-                        variant="outlined"
-                        value={modalForm.values.email}
-                        onChange={modalForm.handleChange}
-                    />
-                    <TextField
-                        name="phoneNumber"
-                        label="SĐT"
-                        variant="outlined"
-                        value={modalForm.values.phoneNumber}
-                        onChange={modalForm.handleChange}
-                    />
+
                     <Stack direction="row" spacing={4}>
                         <TextField type="date" inputProps={{ min: currentDate }} variant="outlined" helperText="Chọn thời gian khám bệnh  &nbsp; " />
                         <TextField type="time" variant="outlined" helperText="Chọn khung giờ khám bệnh " />

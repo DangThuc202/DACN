@@ -1,23 +1,11 @@
 import { Box, Typography, Button, Stack } from "@mui/material"
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import bell_img from "../../image/bell_img.png"
-import ModalCustomer from "./ModalCustomer";
 import { useState } from "react";
 import test from "../../image/test.jpg"
-import test1 from "../../image/test1.jpg"
 
 
 const Bell = () => {
-
-
-    const [isModalOpen, setModalOpen] = useState(false);
-    const openModal = () => {
-        setModalOpen(true);
-    };
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-
 
     const [showNotification, setShowNotification] = useState(false);
 

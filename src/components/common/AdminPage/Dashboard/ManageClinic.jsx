@@ -87,7 +87,6 @@ const ManageClinic = () => {
                         Thêm
                     </Button>
                 </Paper>
-                {/* Table */}
                 <TableContainer component={Paper} sx={{ maxHeight: '500px', overflow: 'auto' }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} aria-label="customized table">
                         <TableHead>
