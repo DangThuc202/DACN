@@ -7,11 +7,12 @@ import place from "../../../image/DoctorPage_img/place.svg"
 import exp from "../../../image/DoctorPage_img/exp.svg"
 import { useEffect, useState } from 'react'
 import Search from './Search'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const HeroSlide = () => {
     const [doctors, setDoctors] = useState([])
     const [filteredDoctors, setFilteredDoctors] = useState([])
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -82,7 +83,7 @@ const HeroSlide = () => {
                                 textAlign: "center",
                                 marginTop: "30px"
                             }}>
-                                <Link to={`/doingubacsi/${doctor._id}`}>
+                                <Link to={`/doingubacsi/${doctor._id}`} onChange={() => navigate(`/doingubacsi/${doctor._id}`)}>
                                     <Typography variant='h6'>{`${doctor.user_id.first_name} ${doctor.user_id.last_name}`}</Typography>
                                     <Typography>{doctor.specialty_id.name}</Typography>
                                 </Link>

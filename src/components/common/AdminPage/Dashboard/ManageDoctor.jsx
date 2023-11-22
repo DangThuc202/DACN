@@ -7,6 +7,7 @@ import Sidebar from '../Sidebar'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const ManageDoctor = () => {
     const [doctors, setDoctors] = useState([])
@@ -16,10 +17,15 @@ const ManageDoctor = () => {
     const [imagePreview, setImagePreview] = useState(null)
 
     useEffect(() => {
-        // Fetch data
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/doctors')
+                const token = Cookies.get('accessToken')
+                console.log(token)
+                const response = await axios.get('http://localhost:3001/api/admin/doctors', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
                 setDoctors(response.data.data)
             } catch (error) {
                 console.error('Error fetching data: ', error)

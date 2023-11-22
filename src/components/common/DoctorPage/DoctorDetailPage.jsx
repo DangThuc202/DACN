@@ -22,13 +22,13 @@ const DoctorDetailPage = () => {
     return <div>Loading...</div>
   }
   return (
-    <div>
-      <h1>Doctor Detail</h1>
-      <p>ID: {id}</p>
-      <p>Name: {doctor.user_id.first_name} {doctor.user_id.first_name}</p>
-      <p>Specialty: {doctor.specialty_id.name}</p>
-      <p>Phone: {doctor.user_id.phone}</p>
-      <p>Descriptin: {doctor.description}</p>
+    <div style={{ margin: '0 auto', maxWidth: '800px', padding: '20px' }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Doctor Detail</h1>
+      <p><strong>ID:</strong> {id}</p>
+      <p><strong>Name:</strong> {doctor.user_id.first_name} {doctor.user_id.last_name}</p>
+      <p><strong>Specialty:</strong> {doctor.specialty_id.name}</p>
+      <p><strong>Phone:</strong> {doctor.user_id.phone}</p>
+      <p><strong>Description:</strong> {doctor.description}</p>
     </div>
   )
 }

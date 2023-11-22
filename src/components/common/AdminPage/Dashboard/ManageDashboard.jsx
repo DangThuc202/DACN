@@ -18,6 +18,8 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import GroupIcon from '@mui/icons-material/Group'
 
 import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 
 // Register the necessary components for Chart.js
@@ -99,12 +101,16 @@ const chartData = {
 const ManageDashboard = () => {
     const [totalSpecialties, setTotalSpecialties] = useState(null)
     const [totalUsers, setTotalUsers] = useState(null)
+    const navigate = useNavigate()
     useEffect(() => {
+        if (!Cookies.get('accessToken')) {
+            navigate('/login')
+            return
+        }
         const fetchSpecialtyCount = async () => {
             try {
-                // Replace with your actual API endpoint
                 const response = await axios.get('http://localhost:3001/api/specialties/count')
-                setTotalSpecialties(response.data.data.count) // Assuming the API returns an object with the count
+                setTotalSpecialties(response.data.data.count)
             } catch (error) {
                 console.error('Error fetching specialty count: ', error)
                 // Handle error appropriately, maybe set the count to 0 or show an error message

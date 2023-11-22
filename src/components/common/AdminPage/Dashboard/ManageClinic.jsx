@@ -16,17 +16,16 @@ const ManageClinic = () => {
     const [editingClinic, setEditingClinic] = useState(null)
     const [imagePreview, setImagePreview] = useState(null)
     useEffect(() => {
-        // Asynchronous function to fetch data
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/api/specialty')
-                setClinics(response.data.data) // Update state with the fetched data
+                setClinics(response.data.data)
             } catch (error) {
                 console.error('Error fetching data: ', error)
             }
         }
         fetchData()
-    }, []) // Empty dependency array means this effect runs once on mount
+    }, [])
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value)
     }
@@ -52,15 +51,11 @@ const ManageClinic = () => {
 
     const handleDelete = async (clinicId) => {
         try {
-            // Replace with your actual API endpoint and delete method
             await axios.delete(`http://localhost:3001/api/specialty/${clinicId}`)
-
-            // Update the local state to remove the deleted clinic
             const updatedClinics = clinics.filter(clinic => clinic._id !== clinicId)
             setClinics(updatedClinics)
         } catch (error) {
             console.error('Error deleting clinic: ', error)
-            // Optionally handle errors, such as showing an error message to the user
         }
     }
     return (

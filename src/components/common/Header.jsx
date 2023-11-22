@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@mui/material"
+import { Box, Button, Stack, Typography } from "@mui/material"
 import logo from "../../image/logo.svg"
 import { styled } from '@mui/material/styles'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
@@ -15,9 +15,22 @@ import Bell from "./Bell"
 const Header = () => {
 
     const [isModalOpen, setModalOpen] = useState(false)
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [userName, setUserName] = useState('')
     const navigate = useNavigate()
-
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("loggedInUser")
+        if (loggedInUser) {
+            const foundUser = JSON.parse(loggedInUser)
+            setIsLoggedIn(true)
+            setUserName(foundUser.name)
+        }
+    }, [])
+    const handleLogout = () => {
+        localStorage.removeItem("loggedInUser")
+        setIsLoggedIn(false)
+        setUserName('')
+    }
     const openModal = () => {
         setModalOpen(true)
     }
@@ -123,6 +136,19 @@ const Header = () => {
             <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Tư Vấn Sức Khỏe Ngay</RightButton>
             <ModalCustomer2 open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
             <RightButton variant="contained" sx={{ backgroundColor: "#2320D4" }} >Tải Ứng Dụng Ngay</RightButton>
+            {
+                isLoggedIn && (
+                    <Stack direction="row" spacing={2}>
+                        <Typography variant="subtitle1">
+                            Xin chào, {userName}
+                        </Typography>
+                        <Button onClick={handleLogout} variant="outlined">
+                            Đăng Xuất
+                        </Button>
+                        <h1>csacasc</h1>
+                    </Stack>
+                )
+            }
         </Box>
 
     )

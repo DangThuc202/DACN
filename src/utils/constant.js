@@ -11,4 +11,4 @@ export const path = {
     MANAGECLINIC: '/admin/manage-clinic',
     MANAGEPATIENT: '/admin/manage-patient',
     MANAGEBOOKING: '/admin/quanlydatlich',
-}       
+}
