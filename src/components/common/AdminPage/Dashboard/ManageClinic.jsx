@@ -56,6 +56,7 @@ const ManageClinic = () => {
 
     const handleDelete = async (clinicId) => {
         try {
+            console.log(clinicId)
             // Replace with your actual API endpoint and delete method
             await axios.delete(`http://localhost:3001/api/specialty/${clinicId}`)
 
