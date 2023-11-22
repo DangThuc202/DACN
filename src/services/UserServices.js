@@ -1,9 +1,9 @@
 import axios from "axios"
 const BASE_URL = 'http://localhost:3001/api'
+
 const loginService = async (email, password) => {
     try {
         const respone = await axios.post(`${BASE_URL}/login`, { email, password })
-        console.log(respone)
         return respone.data
     } catch (error) {
         console.error(error)
