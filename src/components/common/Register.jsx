@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react'
-import { Box, Button, Card, Stack, TextField, Typography } from '@mui/material'
-import axios from 'axios'
+import { Box, Button, Card, Stack, TextField, Typography, InputAdornment, IconButton } from '@mui/material'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import RegisterUser from '../../services/UserServices'
-
+import userService from '../../services/UserServices'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 function Register() {
   const navigate = useNavigate()
@@ -15,6 +13,7 @@ function Register() {
     email: '',
     password: '',
   })
+  const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({})
   const validate = () => {
     let errors = {}
@@ -39,11 +38,15 @@ function Register() {
     const validationErrors = validate()
     setErrors(validationErrors)
     try {
-      if (await RegisterUser(formData))
-        if (Object.keys(validationErrors).length === 0) {
-          toast.success("Đăng ký tài khoản thành công", { autoClose: 3000 })
+      if (Object.keys(validationErrors).length === 0) {
+        const result = await userService.registerUser(formData)
+        if (result) {
+          toast.success("Register succesfully", { autoClose: 3000 })
           setTimeout(() => navigate('/'), 3000)
         }
+      } else {
+        toast.error("Please input all fields", { autoClose: 3000 })
+      }
     } catch (error) {
       console.error('Error registering user:', error)
       if (error.response && error.response.data && error.response.data.message) {
@@ -52,9 +55,14 @@ function Register() {
         toast.error("An unexpected error occurred.")
       }
     }
-    toast.error("Vui lòng điền đầy đủ thông tin.", { autoClose: 3000 })
+  }
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault()
   }
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setFormData((prevFormData) => ({
@@ -98,12 +106,25 @@ function Register() {
             />
             <TextField
               label="Password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="password"
               value={formData.password}
               onChange={handleInputChange}
               error={!!errors.password}
               helperText={errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
             />
             <Button type='submit' variant='contained' sx={{ backgroundColor: '#3f51b5', color: '#fff' }}>Register</Button>
           </Stack>

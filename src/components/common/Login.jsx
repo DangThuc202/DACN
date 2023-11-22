@@ -3,24 +3,25 @@ import { useFormik } from "formik"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import * as Yup from "yup"
-// import userApi from "../../api/modules/user.api";
-// import { setAuthModalOpen } from "../../redux/feartures/authModalSlice";
-// import { setUser } from "../../redux/feartures/userSlice";
+import UserServices from "../../services/UserServices"
 
 const Login = ({ switchAuthState }) => {
     const dispatch = useDispatch()
 
     const [isLoginRequest, setIsLoginRequest] = useState(false)
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [isLoggingIn, setIsLoggingIn] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
 
     const login = useFormik({
         initialValues: {
-            password: "",
-            username: "",
+            email: "",
+            password: ""
         },
         validationSchema: Yup.object({
-            username: Yup.string()
-                .min(0, "Tên đăng nhập không được để trống")
+            email: Yup.string()
+                .min(0, "Email is required")
                 .required("Trường này là bắt buộc"),
             password: Yup.string()
                 .min(0, "Mật khẩu không được để trống")
@@ -30,7 +31,23 @@ const Login = ({ switchAuthState }) => {
             console.log(values)
         }
     })
-
+    const handleLogin = async (event) => {
+        event.preventDefault()
+        setIsLoggingIn(true)
+        setErrorMessage('')
+        try {
+            const result = await UserServices.loginService(username, password)
+            console.log(result)
+        } catch (error) {
+            if (error.response) {
+                setErrorMessage(error.response.data.message)
+            } else {
+                setErrorMessage(error.message || 'An unexpected error occurred.')
+            }
+        } finally {
+            setIsLoggingIn(false)
+        }
+    }
     return (
         <Box component="form" onSubmit={login.handleSubmit}>
             <Stack spacing={3}>
@@ -40,14 +57,14 @@ const Login = ({ switchAuthState }) => {
                 }}
                     variant="h4"
                 >
-                    Đăng nhập
+                    Login
                 </Typography>
                 <TextField
                     type="text"
                     placeholder="Email"
-                    name="username"
+                    name="email"
                     fullWidth
-                    value={login.values.username}
+                    value={login.values.email}
                     onChange={login.handleChange}
                     error={
                         login.touched.username &&
@@ -72,15 +89,16 @@ const Login = ({ switchAuthState }) => {
             <Button
                 type="submit"
                 fullWidth
-                size="large"
                 variant="contained"
-                sx={{ marginTop: 4 }}
-                loading={isLoginRequest}
+                disabled={isLoggingIn}
             >
-                Đăng nhập
+                {isLoggingIn ? 'Logging in...' : 'Login'}
             </Button>
+            {errorMessage && (
+                <Alert severity="error">{errorMessage}</Alert>
+            )}
             <Button type="submit" fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
-                Đổi mật khẩu
+                Forget password
             </Button>
 
             {errorMessage && (

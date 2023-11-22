@@ -28,28 +28,24 @@ const ManageClinic = () => {
         fetchData()
     }, []) // Empty dependency array means this effect runs once on mount
     const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value) // Update search term as user types
+        setSearchTerm(event.target.value)
     }
     const filteredClinics = clinics.filter(clinic => {
         return clinic.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
     const handleEditClick = (clinic) => {
-        setEditingClinic(clinic) // Set the clinic being edited
-        setOpenModal(true) // Open the modal
-        // Set the image preview to the clinic's current image
+        setEditingClinic(clinic)
+        setOpenModal(true)
         setImagePreview(clinic.image || null)
     }
     const handleCloseModal = () => {
         setOpenModal(false)
-        setEditingClinic(null) // Reset the editing clinic
+        setEditingClinic(null)
     }
     const handleImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {
             let img = event.target.files[0]
             setImagePreview(URL.createObjectURL(img))
-
-            // Update the editingClinic state with the new image
-            // Note: You need to handle the actual image file upload process to the server
             setEditingClinic({ ...editingClinic, image: img })
         }
     }

@@ -1,50 +1,51 @@
 import { Box, Button, Stack } from "@mui/material"
 import logo from "../../image/logo.svg"
-import { styled } from '@mui/material/styles';
-import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
-import HomeIcon from '@mui/icons-material/Home';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
-import ModalCustomer2 from "./ModalCustomer2";
-import { useState, useEffect } from "react";
-import { Link, NavLink } from 'react-router-dom';
-import Bell from "./Bell";
-import LoginIcon from '@mui/icons-material/Login';
+import { styled } from '@mui/material/styles'
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
+import HomeIcon from '@mui/icons-material/Home'
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety'
+import MedicalInformationIcon from '@mui/icons-material/MedicalInformation'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
+import ModalCustomer2 from "./ModalCustomer2"
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from 'react-router-dom'
+import Bell from "./Bell"
 
 const Header = () => {
 
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false)
+
+    const navigate = useNavigate()
 
     const openModal = () => {
-        setModalOpen(true);
-    };
+        setModalOpen(true)
+    }
 
     const closeModal = () => {
-        setModalOpen(false);
-    };
+        setModalOpen(false)
+    }
 
-    const [isTop, setIsTop] = useState(false);
+    const [isTop, setIsTop] = useState(false)
 
     const handleScroll = () => {
-        const scrollTop = window.pageYOffset;
+        const scrollTop = window.pageYOffset
 
         // Kiểm tra vị trí cuộn của trang và cập nhật trạng thái isTop
         if (scrollTop > 0) {
-            setIsTop(false);
+            setIsTop(false)
         } else {
-            setIsTop(true);
+            setIsTop(true)
         }
-    };
+    }
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll)
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
 
     const MidButton = styled(Button)({
@@ -56,7 +57,7 @@ const Header = () => {
             backgroundColor: '#00FFFF',
             borderRadius: "100px"
         },
-    });
+    })
 
     const RightButton = styled(Button)({
         marginLeft: "20px",
@@ -91,11 +92,11 @@ const Header = () => {
         >
             <img style={{ padding: "25px", zIndex: 100 }} src={logo} />
             <Stack direction="row" spacing={2} sx={{ marginLeft: "10px" }}>
-                <a href="/">
+                <Link to="/" onClick={() => navigate('/')}>
                     <MidButton variant="text"> <HomeIcon style={IconStyle} />
                         Trang Chủ
                     </MidButton>
-                </a>
+                </Link>
                 <MidButton variant="text" > <MedicalServicesIcon style={IconStyle} />
                     Các Dịch Vụ
                 </MidButton>
@@ -104,16 +105,16 @@ const Header = () => {
                         Nhà Thuốc Jio
                     </MidButton>
                 </a>
-                <a href="/chuyenkhoa">
+                <Link to="/chuyenkhoa" onClick={() => navigate('/chuyenkhoa')}>
                     <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
                         Chuyên khoa
                     </MidButton>
-                </a>
-                <a href="/doingubacsi">
-                    <MidButton variant="text" > <PeopleAltIcon style={IconStyle} />
+                </Link>
+                <Link to="/doingubacsi" onClick={() => navigate('/doingubacsi')}>
+                    <MidButton variant="text"> <PeopleAltIcon style={IconStyle} />
                         Đội Ngũ Bác Sĩ
                     </MidButton>
-                </a>
+                </Link>
                 <MidButton variant="text" > <NewspaperIcon style={IconStyle} />
                     Tin Tức
                 </MidButton>

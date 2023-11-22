@@ -12,10 +12,12 @@ import ManagePatient from './components/common/AdminPage/Dashboard/ManagePatient
 import ManageBooking from './components/common/AdminPage/Dashboard/ManageBooking'
 import ManageDashboard from './components/common/AdminPage/Dashboard/ManageDashboard'
 import Register from './components/common/Register'
+
 import DetailDoctor from './pages/DetailDoctor'
+import NotFoundPage from './components/NotFoundPage'
+import DoctorDetailPage from './components/common/DoctorPage/DoctorDetailPage'
 
 const App = () => {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -32,6 +34,7 @@ const App = () => {
           <Route path={path.MANAGEBOOKING} element={<ManageBooking />} />
           <Route path={path.DETAILDOCTOR} element={<DetailDoctor />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
 
