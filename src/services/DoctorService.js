@@ -1,15 +1,13 @@
-const axios = require("axios")
+import axios from 'axios'
+
 
 const BASE_URL = 'http://localhost:3001/api'
-const getDoctors = async () => {
+export const getDoctors = async () => {
   try {
-    const respone = await axios.get(`${BASE_URL}/doctors`)
-    return respone.data.data
+    const response = await axios.get(`${BASE_URL}/doctors`)
+    return response.data.data
   } catch (error) {
-    console.error(error)
+    console.error('Error fetching data: ', error)
     throw error
   }
-}
-module.exports = {
-  getDoctors
 }

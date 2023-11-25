@@ -11,26 +11,37 @@ import ModalCustomer2 from "./ModalCustomer2"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import Bell from "./Bell"
-
+import { Cookie, Login } from "@mui/icons-material"
+import Register from "./Register"
+import { jwtDecode } from "jwt-decode"
+import Cookies from "js-cookie"
 const Header = () => {
 
     const [isModalOpen, setModalOpen] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [userName, setUserName] = useState('')
     const navigate = useNavigate()
     useEffect(() => {
-        const loggedInUser = localStorage.getItem("loggedInUser")
-        if (loggedInUser) {
-            const foundUser = JSON.parse(loggedInUser)
-            setIsLoggedIn(true)
-            setUserName(foundUser.name)
-        }
+        const loggedIn = checkAuthToken()
+        setIsLoggedIn(loggedIn)
     }, [])
-    const handleLogout = () => {
-        localStorage.removeItem("loggedInUser")
-        setIsLoggedIn(false)
-        setUserName('')
+    const checkAuthToken = () => {
+        const token = Cookies.get('accessToken') // Hoặc sessionStorage hoặc cookies
+        if (!token) {
+            return false // Token không tồn tại
+        }
+        try {
+            const decodedToken = jwtDecode(token)
+            const currentTime = Date.now() / 1000
+            if (decodedToken.exp < currentTime) {
+                Cookies.remove('accessToken') // Xóa token hết hạn
+                return false // Token hết hạn
+            }
+            return true // Token hợp lệ và chưa hết hạn
+        } catch (error) {
+            return false // Token không hợp lệ hoặc không thể decode
+        }
     }
+
     const openModal = () => {
         setModalOpen(true)
     }
@@ -43,8 +54,6 @@ const Header = () => {
 
     const handleScroll = () => {
         const scrollTop = window.pageYOffset
-
-        // Kiểm tra vị trí cuộn của trang và cập nhật trạng thái isTop
         if (scrollTop > 0) {
             setIsTop(false)
         } else {
@@ -118,7 +127,12 @@ const Header = () => {
                         Nhà Thuốc Jio
                     </MidButton>
                 </a>
-                <Link to="/chuyenkhoa" onClick={() => navigate('/chuyenkhoa')}>
+                <Link to="/phongkham" onClick={() => navigate('/phongkham')}>
+                    <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
+                        Phòng khám
+                    </MidButton>
+                </Link>
+                <Link to="/phongkham" onClick={() => navigate('/phongkham')}>
                     <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
                         Chuyên khoa
                     </MidButton>
@@ -136,19 +150,16 @@ const Header = () => {
             <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Tư Vấn Sức Khỏe Ngay</RightButton>
             <ModalCustomer2 open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
             <RightButton variant="contained" sx={{ backgroundColor: "#2320D4" }} >Tải Ứng Dụng Ngay</RightButton>
-            {
-                isLoggedIn && (
-                    <Stack direction="row" spacing={2}>
-                        <Typography variant="subtitle1">
-                            Xin chào, {userName}
-                        </Typography>
-                        <Button onClick={handleLogout} variant="outlined">
-                            Đăng Xuất
-                        </Button>
-                        <h1>csacasc</h1>
-                    </Stack>
-                )
-            }
+            <Link to="/login" onClick={() => navigate('/login')}>
+                <MidButton variant="text" > <Login style={IconStyle} onClick={checkAuthToken} />
+                    {isLoggedIn ? 'Logout' : 'Login'}
+                </MidButton>
+            </Link>
+            <Link to="/register" onClick={() => navigate('/register')}>
+                <MidButton variant="text" > <Login style={IconStyle} />
+                    Register
+                </MidButton>
+            </Link>
         </Box>
 
     )

@@ -8,6 +8,7 @@ import exp from "../../../image/DoctorPage_img/exp.svg"
 import { useEffect, useState } from 'react'
 import Search from './Search'
 import { Link, useNavigate } from 'react-router-dom'
+import { getDoctors } from './../../../services/DoctorService'
 
 const HeroSlide = () => {
     const [doctors, setDoctors] = useState([])
@@ -16,10 +17,11 @@ const HeroSlide = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/doctors')
-                setDoctors(response.data.data)
-                setFilteredDoctors(response.data.data)
+                const doctorsData = await getDoctors()
+                setDoctors(doctorsData)
+                setFilteredDoctors(doctorsData)
             } catch (error) {
+                console.log(error)
                 console.error('Error fetching data: ', error)
             }
         }
