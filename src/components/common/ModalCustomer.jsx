@@ -1,14 +1,28 @@
 import { Box, Modal, Typography, TextField, Stack, Button, Avatar } from "@mui/material"
-import { useFormik } from "formik";
+import { useFormik } from "formik"
 import * as Yup from "yup"
 import test from "../../image/test.jpg"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import axios from "axios"
 
 const ModalCustomer = ({ open, handleClose }) => {
-
+    const { id } = useParams()
+    const [doctor, setDoctor] = useState(null)
     const today = new Date()
-    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
-    const currentDate = tomorrow.toISOString().split('T')[0];
-
+    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
+    const currentDate = tomorrow.toISOString().split('T')[0]
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3001/api/doctor/${id}`)
+                setDoctor(response.data.data)
+            } catch (error) {
+                console.error('Error fetching data: ', error)
+            }
+        }
+        fetchData()
+    }, [id])
     const modalForm = useFormik({
         initialValues: {
             firstName: "",
@@ -30,10 +44,12 @@ const ModalCustomer = ({ open, handleClose }) => {
                 .required("Không được để trống phần này"),
         }),
         onSubmit: values => {
-            console.log(values);
+            console.log(values)
         }
     })
-
+    if (!doctor) {
+        return <div>Loading...</div>
+    }
     return (
         <Modal open={open} onClose={handleClose}>
             <Box sx={{
@@ -57,8 +73,8 @@ const ModalCustomer = ({ open, handleClose }) => {
                 <Box display="flex" mb={3}>
                     <Avatar sx={{ width: "60px", height: "60px" }} src={test} />
                     <Stack sx={{ display: "flex", justifyContent: "center", ml: "20px" }}>
-                        <Typography>BS.<strong>Đặng Hoàng Thức</strong></Typography>
-                        <Typography>Chuyên khoa <strong>Cơ xương khớp</strong> </Typography>
+                        <Typography>BS.<strong>{doctor.user_id.first_name} {doctor.user_id.last_name}</strong></Typography>
+                        <Typography>Chuyên khoa <strong>{doctor.specialty_id.name}</strong> </Typography>
                     </Stack>
                 </Box>
                 <Stack spacing={4}>

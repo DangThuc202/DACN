@@ -8,8 +8,7 @@ import exp from "../../../image/DoctorPage_img/exp.svg"
 import { useEffect, useState } from 'react'
 import Search from './Search'
 import { Link, useNavigate } from 'react-router-dom'
-import { getDoctors } from './../../../services/DoctorService'
-
+import { DoctorService } from '../../../services/DoctorService'
 const HeroSlide = () => {
     const [doctors, setDoctors] = useState([])
     const [filteredDoctors, setFilteredDoctors] = useState([])
@@ -17,7 +16,7 @@ const HeroSlide = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const doctorsData = await getDoctors()
+                const doctorsData = await DoctorService.getDoctors()
                 setDoctors(doctorsData)
                 setFilteredDoctors(doctorsData)
             } catch (error) {
@@ -102,9 +101,7 @@ const HeroSlide = () => {
                                             {doctor.user_id.address && <><br />{doctor.user_id.address}<br /></>}
                                         </Typography>
                                     </Typography>
-
                                 </Box>
-
                             </Box>
                             <Box backgroundColor="rgb(213 237 250)" sx={contentStyle}>
                                 <Box sx={iconStyle}>
