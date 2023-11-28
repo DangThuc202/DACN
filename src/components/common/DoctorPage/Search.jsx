@@ -1,11 +1,25 @@
 import { Box, TextField, Stack, Select, FormControl, InputLabel, MenuItem, Typography } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search'
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { specialtyService } from "../../../services/specialtyService"
 
 const Search = ({ onChangeSearch }) => {
     const [specialties, setSpecialties] = useState([])
-    const [selectedSpecialty, setSelectedSpecialty] = useState('')
-
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const specialtiesData = await specialtyService.getSpecialties()
+                setSpecialties(specialtiesData)
+                if (specialtiesData.length > 0) {
+                    onChangeSearch(specialtiesData[0].name)
+                }
+            } catch (error) {
+                console.log(error)
+                console.error('Error fetching data: ', error)
+            }
+        }
+        fetchData()
+    })
     const textStyle = {
         height: "50px",
         width: "420px",
@@ -37,9 +51,8 @@ const Search = ({ onChangeSearch }) => {
                     <InputLabel id="specialty-select-label">Chuyên khoa</InputLabel>
                     <Select
                         labelId="specialty-select-label"
-                        value={selectedSpecialty}
+                        value={setSpecialties}
                         label="Chuyên khoa"
-                        onChange={(e) => setSelectedSpecialty(e.target.value)}
                     >
                         {specialties.map((specialty) => (
                             <MenuItem key={specialty.id} value={specialty.name}>
@@ -52,10 +65,14 @@ const Search = ({ onChangeSearch }) => {
                     <InputLabel id="specialty-select-label">Địa điểm</InputLabel>
                     <Select
                         labelId="specialty-select-label"
-                        value={selectedSpecialty}
+                        value={setSpecialties}
                         label="Địa điểm"
                     >
-                        <p>HCM</p>
+                        {specialties.map((specialty) => (
+                            <MenuItem key={specialty.id} value={specialty.name}>
+                                {specialty.name}
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
             </Stack>

@@ -18,6 +18,8 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import GroupIcon from '@mui/icons-material/Group'
 
 import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 
 // Register the necessary components for Chart.js
@@ -99,25 +101,36 @@ const chartData = {
 const ManageDashboard = () => {
     const [totalSpecialties, setTotalSpecialties] = useState(null)
     const [totalUsers, setTotalUsers] = useState(null)
+    const navigate = useNavigate()
     useEffect(() => {
+        if (!Cookies.get('accessToken')) {
+            navigate('/login')
+            return
+        }
         const fetchSpecialtyCount = async () => {
             try {
-                // Replace with your actual API endpoint
-                const response = await axios.get('http://localhost:3001/api/specialties/count')
-                setTotalSpecialties(response.data.data.count) // Assuming the API returns an object with the count
+                const token = Cookies.get('accessToken')
+                const response = await axios.get('http://localhost:3001/api/specialties/count', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                setTotalSpecialties(response.data.data.count)
             } catch (error) {
                 console.error('Error fetching specialty count: ', error)
-                // Handle error appropriately, maybe set the count to 0 or show an error message
             }
         }
         const fetchUserCount = async () => {
             try {
-                // Replace with your actual API endpoint
-                const response = await axios.get('http://localhost:3001/api/admin/users/count')
-                setTotalUsers(response.data.data.count) // Assuming the API returns an object with the count
+                const token = Cookies.get('accessToken')
+                const response = await axios.get('http://localhost:3001/api/admin/users/count', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                setTotalUsers(response.data.data.count)
             } catch (error) {
                 console.error('Error fetching specialty count: ', error)
-                // Handle error appropriately, maybe set the count to 0 or show an error message
             }
         }
         fetchSpecialtyCount()
@@ -166,10 +179,10 @@ const ManageDashboard = () => {
                         <StatCard key={index} {...stat} />
                     ))}
                 </Box>
-                <Box sx={{ height: '40%' }}> {/* Adjust the height as necessary */}
+                <Box sx={{ height: '40%' }}>
                     <Doughnut data={chartData} options={chartOptions} />
                 </Box>
-                <Box sx={{ height: '40%' }}> {/* Adjust the height as necessary */}
+                <Box sx={{ height: '40%' }}>
                     <Bar data={chartData} options={{ ...chartOptions, plugins: { ...chartOptions.plugins, title: { ...chartOptions.plugins.title, text: 'Monthly Revenue' } } }} />
                 </Box>
             </Box>

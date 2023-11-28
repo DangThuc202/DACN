@@ -3,7 +3,7 @@ export const path = {
     LOGIN: '/login',
     REGISTER: '/register',
     SYSTEM: '/hethong',
-    SPECIALTY: '/chuyenkhoa',
+    SPECIALTY: '/phongkham',
     DOCTORS: '/doingubacsi',
     DOCTOR_DETAIL: '/doingubacsi/:id',
     ADMIN: '/admin/dashboard',
@@ -11,6 +11,6 @@ export const path = {
     MANAGECLINIC: '/admin/manage-clinic',
     MANAGEPATIENT: '/admin/manage-patient',
     MANAGEBOOKING: '/admin/quanlydatlich',
-    DETAILDOCTOR: '/thongtinbacsi',
-    DETAILSPECIALTY: '/thongtinchuyenkhoa'
-}       
+    DETAILSPECIALTY: '/thongtinchuyenkhoa'    
+    DETAIL_DOCTOR: '/thongtinbacsi'
+}

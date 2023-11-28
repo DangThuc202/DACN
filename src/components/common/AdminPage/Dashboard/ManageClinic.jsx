@@ -8,6 +8,9 @@ import Sidebar from '../Sidebar'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
+import { specialtyService } from '../../../../services/specialtyService'
+import Cookies from 'js-cookie'
+import { ToastContainer, toast } from 'react-toastify'
 
 const ManageClinic = () => {
     const [clinics, setClinics] = useState([])
@@ -16,17 +19,17 @@ const ManageClinic = () => {
     const [editingClinic, setEditingClinic] = useState(null)
     const [imagePreview, setImagePreview] = useState(null)
     useEffect(() => {
-        // Asynchronous function to fetch data
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/specialty')
-                setClinics(response.data.data) // Update state with the fetched data
+                const response = await specialtyService.getSpecialties()
+                console.log(response)
+                setClinics(response)
             } catch (error) {
                 console.error('Error fetching data: ', error)
             }
         }
         fetchData()
-    }, []) // Empty dependency array means this effect runs once on mount
+    }, [])
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value)
     }
@@ -52,16 +55,16 @@ const ManageClinic = () => {
 
     const handleDelete = async (clinicId) => {
         try {
-            console.log(clinicId)
-            // Replace with your actual API endpoint and delete method
-            await axios.delete(`http://localhost:3001/api/specialty/${clinicId}`)
-
-            // Update the local state to remove the deleted clinic
+            await axios.delete(`http://localhost:3001/api/admin/specialty/${clinicId}`, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('accessToken')}`
+                }
+            })
             const updatedClinics = clinics.filter(clinic => clinic._id !== clinicId)
+            toast.success('Clinic deleted successfully') // Show success toast
             setClinics(updatedClinics)
         } catch (error) {
             console.error('Error deleting clinic: ', error)
-            // Optionally handle errors, such as showing an error message to the user
         }
     }
     return (
@@ -93,7 +96,6 @@ const ManageClinic = () => {
                         Thêm
                     </Button>
                 </Paper>
-                {/* Table */}
                 <TableContainer component={Paper} sx={{ maxHeight: '500px', overflow: 'auto' }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} aria-label="customized table">
                         <TableHead>
@@ -106,8 +108,8 @@ const ManageClinic = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {filteredClinics.map((clinic, index) => ( // Use filteredClinics here
-                                <TableRow key={clinic.id}>
+                            {filteredClinics.map((clinic, index) => (
+                                <TableRow key={clinic._id}>
                                     <TableCell component="th" scope="row">
                                         {index + 1}
                                     </TableCell>
@@ -120,7 +122,7 @@ const ManageClinic = () => {
                                         <IconButton color="primary" onClick={() => handleEditClick(clinic)}>
                                             <EditIcon />
                                         </IconButton>
-                                        <IconButton color="secondary" onClick={() => handleDelete(clinic.id)}>
+                                        <IconButton color="secondary" onClick={() => handleDelete(clinic._id)}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </TableCell>
@@ -159,8 +161,6 @@ const ManageClinic = () => {
                                         value={editingClinic?.name || ''}
                                         onChange={(e) => setEditingClinic({ ...editingClinic, name: e.target.value })}
                                     />
-                                    {/* Add other fields as needed */}
-                                    {/* Example: Description */}
                                     <TextField
                                         label="Mô tả"
                                         variant="outlined"
@@ -200,6 +200,7 @@ const ManageClinic = () => {
                     </Table>
                 </TableContainer>
             </Box>
+            <ToastContainer />
         </Box>
     )
 }

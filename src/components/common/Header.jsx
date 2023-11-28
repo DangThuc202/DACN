@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Tooltip } from "@mui/material"
+import { Box, Button, Stack, Tooltip, Typography } from "@mui/material"
 import logo from "../../image/logo.svg"
 import { styled } from '@mui/material/styles'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
@@ -12,12 +12,36 @@ import { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import Bell from "./Bell"
 import LoginIcon from '@mui/icons-material/Login';
-
+import { Cookie, Login } from "@mui/icons-material"
+import Register from "./Register"
+import { jwtDecode } from "jwt-decode"
+import Cookies from "js-cookie"
 const Header = () => {
 
     const [isModalOpen, setModalOpen] = useState(false)
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const navigate = useNavigate()
+    useEffect(() => {
+        const loggedIn = checkAuthToken()
+        setIsLoggedIn(loggedIn)
+    }, [])
+    const checkAuthToken = () => {
+        const token = Cookies.get('accessToken') // Hoặc sessionStorage hoặc cookies
+        if (!token) {
+            return false // Token không tồn tại
+        }
+        try {
+            const decodedToken = jwtDecode(token)
+            const currentTime = Date.now() / 1000
+            if (decodedToken.exp < currentTime) {
+                Cookies.remove('accessToken') // Xóa token hết hạn
+                return false // Token hết hạn
+            }
+            return true // Token hợp lệ và chưa hết hạn
+        } catch (error) {
+            return false // Token không hợp lệ hoặc không thể decode
+        }
+    }
 
     const openModal = () => {
         setModalOpen(true)
@@ -31,8 +55,6 @@ const Header = () => {
 
     const handleScroll = () => {
         const scrollTop = window.pageYOffset
-
-        // Kiểm tra vị trí cuộn của trang và cập nhật trạng thái isTop
         if (scrollTop > 0) {
             setIsTop(false)
         } else {
@@ -106,7 +128,12 @@ const Header = () => {
                         Nhà Thuốc Jio
                     </MidButton>
                 </a>
-                <Link to="/chuyenkhoa" onClick={() => navigate('/chuyenkhoa')}>
+                <Link to="/phongkham" onClick={() => navigate('/phongkham')}>
+                    <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
+                        Phòng khám
+                    </MidButton>
+                </Link>
+                <Link to="/phongkham" onClick={() => navigate('/phongkham')}>
                     <MidButton variant="text" > <MedicalInformationIcon style={IconStyle} />
                         Chuyên khoa
                     </MidButton>
@@ -124,10 +151,15 @@ const Header = () => {
             <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Tư Vấn Sức Khỏe Ngay</RightButton>
             <ModalCustomer2 open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
             <RightButton variant="contained" sx={{ backgroundColor: "#2320D4" }} >Tải Ứng Dụng Ngay</RightButton>
-            <Link to="/login">
-                <Tooltip title="Đăng nhập">
-                    <LoginIcon sx={{ marginLeft: "10px" }} />
-                </Tooltip>
+            <Link to="/login" onClick={() => navigate('/login')}>
+                <MidButton variant="text" > <Login style={IconStyle} onClick={checkAuthToken} />
+                    {isLoggedIn ? 'Logout' : 'Login'}
+                </MidButton>
+            </Link>
+            <Link to="/register" onClick={() => navigate('/register')}>
+                <MidButton variant="text" > <Login style={IconStyle} />
+                    Register
+                </MidButton>
             </Link>
         </Box>
 

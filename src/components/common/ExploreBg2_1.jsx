@@ -3,19 +3,9 @@ import explore1 from "../../image/explore1.jpg"
 import PlaceIcon from '@mui/icons-material/Place'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { useEffect, useState } from "react"
-import axios from "axios"
 
 const ExploreBg2_1 = () => {
     const [data, setData] = useState(null)
-    useEffect(() => {
-        axios.get('http://localhost:3001/api/clinic/655472b0cb2b79c7b39279fc')
-            .then(response => {
-                setData(response.data.data)
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error)
-            })
-    }, [])
     const BtnStyle = {
         height: "auto",
         width: "auto",

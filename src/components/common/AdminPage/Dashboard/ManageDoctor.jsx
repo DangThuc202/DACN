@@ -7,6 +7,8 @@ import Sidebar from '../Sidebar'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
+import Cookies from 'js-cookie'
+import { adminService } from '../../../../services/adminService'
 
 const ManageDoctor = () => {
     const [doctors, setDoctors] = useState([])
@@ -16,11 +18,11 @@ const ManageDoctor = () => {
     const [imagePreview, setImagePreview] = useState(null)
 
     useEffect(() => {
-        // Fetch data
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/doctors')
-                setDoctors(response.data.data)
+                const response = await adminService.getDoctors()
+                console.log(response)
+                setDoctors(response)
             } catch (error) {
                 console.error('Error fetching data: ', error)
             }
@@ -30,6 +32,21 @@ const ManageDoctor = () => {
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value)
+    }
+    const handleOpenModal = (doctor) => {
+        setEditingDoctor(doctor)
+        setOpenModal(true) // Mở modal
+    }
+    const handleCloseModal = () => {
+        setOpenModal(false) // Đóng modal
+    }
+
+    const handleImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            let img = event.target.files[0]
+            setImagePreview(URL.createObjectURL(img))
+            setEditingDoctor({ ...editingDoctor, image: img })
+        }
     }
     return (
         <Box sx={{ display: 'flex', width: '100%' }}>
@@ -41,8 +58,6 @@ const ManageDoctor = () => {
                         QUẢN LÝ THÔNG TIN BÁC SĨ
                     </Typography>
                 </Box>
-
-                {/* Search and Add Button */}
                 <Paper sx={{ p: 2, mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <TextField
                         id="search"
@@ -56,20 +71,17 @@ const ManageDoctor = () => {
                         Thêm
                     </Button>
                 </Paper>
-
-                {/* Doctors Table */}
                 <TableContainer component={Paper} sx={{ maxHeight: '500px', overflow: 'auto' }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
                                 <TableCell>#</TableCell>
-                                <TableCell>Avatar</TableCell>
-                                <TableCell>Họ tên</TableCell>
-                                <TableCell align='center'>Chức vụ</TableCell>
-                                <TableCell align="right">Chuyên khoa</TableCell>
-                                <TableCell align="right">Phòng khám</TableCell>
-                                <TableCell align="right">Địa chỉ</TableCell>
-                                <TableCell align="right">Hành động</TableCell>
+                                <TableCell align='left'>Avatar</TableCell>
+                                <TableCell align='left'>Họ tên</TableCell>
+                                <TableCell align="left">Chuyên khoa</TableCell>
+                                <TableCell align="left">Phòng khám</TableCell>
+                                <TableCell align="left">Địa chỉ</TableCell>
+                                <TableCell align="left">Hành động</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -82,14 +94,13 @@ const ManageDoctor = () => {
                                         <img src={doctor.avatar} alt={doctor.name} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        {doctor.name}
+                                        {doctor.user_id.first_name + ' ' + doctor.user_id.last_name}
                                     </TableCell>
-                                    <TableCell align="center">{doctor.position}</TableCell>
-                                    <TableCell align="right">{doctor.specialty}</TableCell>
-                                    <TableCell align="right">{doctor.clinic}</TableCell>
-                                    <TableCell align="right">{doctor.address}</TableCell>
+                                    <TableCell align="center">{doctor.specialty_id.name}</TableCell>
+                                    <TableCell align="right">{doctor.clinic_id.name}</TableCell>
+                                    <TableCell align="right">{doctor.user_id.address}</TableCell>
                                     <TableCell align="right">
-                                        <IconButton>
+                                        <IconButton onClick={() => handleOpenModal()}>
                                             <EditIcon />
                                         </IconButton>
                                         <IconButton>
@@ -101,8 +112,84 @@ const ManageDoctor = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-
-                {/* ... Modal for editing doctor details ... */}
+                <Modal
+                    aria-labelledby="edit-clinic-modal"
+                    aria-describedby="edit-clinic-form"
+                    open={openModal}
+                    onClose={handleCloseModal}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openModal}>
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 400, // You can adjust the width
+                            bgcolor: 'background.paper',
+                            boxShadow: 24,
+                            p: 4,
+                            borderRadius: 2,
+                        }}>
+                            <Typography variant="h6" sx={{ mb: 2 }}>Chỉnh sửa chuyên khoa</Typography>
+                            <TextField
+                                label="Họ tên"
+                                variant="outlined"
+                                fullWidth
+                                sx={{ mb: 2 }}
+                                value={editingDoctor?.name || ''}
+                                onChange={(e) => setEditingDoctor({ ...editingDoctor, name: e.target.value })}
+                            />
+                            <TextField
+                                label="Chuyên khoa"
+                                variant="outlined"
+                                fullWidth
+                                multiline
+                                rows={4}
+                                sx={{ mb: 2 }}
+                                value={editingDoctor?.description || ''}
+                                onChange={(e) => setEditingDoctor({ ...editingDoctor, description: e.target.value })}
+                            />
+                            <TextField
+                                label="Phòng khám"
+                                variant="outlined"
+                                fullWidth
+                                multiline
+                                rows={4}
+                                sx={{ mb: 2 }}
+                                value={editingDoctor?.description || ''}
+                                onChange={(e) => setEditingDoctor({ ...editingDoctor, description: e.target.value })}
+                            />
+                            {/* Image Upload */}
+                            <Box sx={{ mb: 2 }}>
+                                <Button variant="contained" component="label">
+                                    Upload Image
+                                    <input
+                                        type="file"
+                                        hidden
+                                        onChange={handleImageChange}
+                                    />
+                                </Button>
+                                {(imagePreview || editingDoctor?.image) && (
+                                    <Box sx={{ mt: 2 }}>
+                                        <img src={imagePreview || editingDoctor?.image} alt="Preview" style={{ width: '100%', maxHeight: '200px', objectFit: 'contain' }} />
+                                    </Box>
+                                )}
+                            </Box>
+                            {/* Buttons for actions */}
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <Button onClick={handleCloseModal} sx={{ mr: 1 }}>Thoát</Button>
+                                <Button variant="contained" color="primary" onClick={() => {/* handle update */ }}>
+                                    Update
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Fade>
+                </Modal>
             </Box>
         </Box >
     )
