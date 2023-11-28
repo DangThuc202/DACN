@@ -45,11 +45,11 @@ const ExploreBg2_1 = () => {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 borderRadius: "50px",
+                // position: "absolute"
             }} />
             <Box sx={{ paddingLeft: "14px" }}>
-                <Typography variant="h5" sx={{ padding: "16px 0", fontWeight: 600 }} >
-                    {data ? data.name : 'Loading...'}
-                </Typography>
+                <Typography variant="h5" sx={{ padding: "16px 0", fontWeight: 600 }} >Republic Plaza</Typography>
+
                 <Typography sx={{
                     fontSize: "18px",
                     marginBottom: "12px",
@@ -57,7 +57,7 @@ const ExploreBg2_1 = () => {
                 }}
                 >
                     <PlaceIcon style={{ color: "red", marginRight: "4px", fontSize: "18px" }} />
-                    {data ? data.address : 'Loading...'}
+                    Tầng trệt, 18E Cộng Hòa, phường 4, <br />Tân Bình, TP.HCM
                 </Typography>
 
                 <Typography sx={{

@@ -28,7 +28,7 @@ const Booking = () => {
         }}>
             <Typography variant="h6" ml={3} mt={3} mb={3}>Đặt lịch khám</Typography>
             <Box sx={{ padding: " 0 30px", display: "flex", flexWrap: "wrap", gap: "30px" }}>
-                <Box disabled sx={btnStyle}>
+                <Box sx={btnStyle}>
                     T3 (22/11/2023) <br />
                     <Typography sx={{ color: "" }}>5 khung giờ</Typography>
                 </Box>

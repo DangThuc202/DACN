@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@mui/material"
+import { Box, Button, Stack, Tooltip } from "@mui/material"
 import logo from "../../image/logo.svg"
 import { styled } from '@mui/material/styles'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
@@ -11,6 +11,7 @@ import ModalCustomer2 from "./ModalCustomer2"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import Bell from "./Bell"
+import LoginIcon from '@mui/icons-material/Login';
 
 const Header = () => {
 
@@ -123,6 +124,11 @@ const Header = () => {
             <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Tư Vấn Sức Khỏe Ngay</RightButton>
             <ModalCustomer2 open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
             <RightButton variant="contained" sx={{ backgroundColor: "#2320D4" }} >Tải Ứng Dụng Ngay</RightButton>
+            <Link to="/login">
+                <Tooltip title="Đăng nhập">
+                    <LoginIcon sx={{ marginLeft: "10px" }} />
+                </Tooltip>
+            </Link>
         </Box>
 
     )

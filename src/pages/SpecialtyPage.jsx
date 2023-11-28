@@ -17,7 +17,7 @@ const SpecialtyPage = () => {
         document.title = 'Chuyên Khoa';
     }, []);
     return (
-        <Box>
+        <Box sx={{ backgroundColor: "#fff", }}>
             <HeaderCovid />
             <Header />
             <Slide />
