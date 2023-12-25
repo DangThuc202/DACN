@@ -4,13 +4,13 @@ import { useState } from 'react'
 
 const Booking = () => {
 
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false)
     const openModal = () => {
-        setModalOpen(true);
-    };
+        setModalOpen(true)
+    }
     const closeModal = () => {
-        setModalOpen(false);
-    };
+        setModalOpen(false)
+    }
 
 
     return (

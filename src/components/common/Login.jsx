@@ -8,6 +8,8 @@ import Cookies from 'js-cookie'
 import { Link, useNavigate } from "react-router-dom"
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import GoogleIcon from '@mui/icons-material/Google'
+import axios from "axios"
 const Login = ({ switchAuthState }) => {
     const [isLoggingIn, setIsLoggingIn] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
@@ -16,6 +18,23 @@ const Login = ({ switchAuthState }) => {
     const togglePasswordVisibility = () => {
         console.log(showPassword)
         setShowPassword(!showPassword)
+    }
+    const handleGoogleLogin = async () => {
+        try {
+            const googleToken = '845159881702-5qqakik71b1iajk32a7425ojahb9jcid.apps.googleusercontent.com' // Get the Google token from the Google login API
+            const apiResponse = await axios.post('http://localhost:3001/api/auth-google', {
+                token: googleToken, // Send the Google token to your backend server
+            })
+            if (apiResponse.data.success) {
+                console.log('Login successful')
+
+            } else {
+                console.log('Login failed')
+            }
+        } catch (error) {
+            const message = error.response ? error.response.data.message : (error.message || 'An unexpected error occurred.')
+            toast.error(message)
+        }
     }
     const login = useFormik({
         initialValues: {
@@ -33,10 +52,10 @@ const Login = ({ switchAuthState }) => {
             setIsLoggingIn(true)
             setErrorMessage('')
             try {
+                //Chỗ này call api
                 const result = await UserServices.loginService(values.email, values.password)
                 if (result && result.accessToken) {
                     Cookies.set('accessToken', result.accessToken)
-                    // Cookies.set('refreshToken', result.refreshToken)
                     toast.success("Đăng nhập thành công")
                     navigate('/')
                 } else {
@@ -100,10 +119,21 @@ const Login = ({ switchAuthState }) => {
                         </Alert>
                     </Box>
                 )}
+                <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 1, mb: 2, bgcolor: 'error.main' }}
+                    onClick={() => handleGoogleLogin()}
+                    startIcon={<GoogleIcon />}
+                    disabled={isLoggingIn}
+                >
+                    Login with Google
+                </Button>
                 <Button type="button" fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
                     Forget password
                 </Button>
-                <Link to="/"> {/* Add this line */}
+                <Link to="/">
                     <Button type="button" fullWidth sx={{ marginTop: 1 }}>
                         Back to Home
                     </Button>

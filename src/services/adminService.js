@@ -2,7 +2,7 @@ import axios from "axios"
 import Cookies from "js-cookie"
 const API_URL = "http://localhost:3001/api"
 const token = Cookies.get("accessToken")
-console.log(token)
+
 export class adminService {
   static async getDoctors() {
     try {

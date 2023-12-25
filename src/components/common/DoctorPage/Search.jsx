@@ -1,7 +1,7 @@
 import { Box, TextField, Stack, Select, FormControl, InputLabel, MenuItem, Typography } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search'
 import { useEffect, useState } from "react"
-import { specialtyService } from "../../../services/specialtyService"
+import specialtyService from "../../../services/specialtyService"
 
 const Search = ({ onChangeSearch }) => {
     const [specialties, setSpecialties] = useState([])
@@ -14,7 +14,6 @@ const Search = ({ onChangeSearch }) => {
                     onChangeSearch(specialtiesData[0].name)
                 }
             } catch (error) {
-                console.log(error)
                 console.error('Error fetching data: ', error)
             }
         }

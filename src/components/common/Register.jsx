@@ -31,7 +31,11 @@ function Register() {
     if (!formData.password) {
       errors.password = 'Password is required'
     }
+    if (!formData.phone) {
+      errors.phone = 'Phone is required'
+    }
     return errors
+
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -39,7 +43,8 @@ function Register() {
     setErrors(validationErrors)
     try {
       if (Object.keys(validationErrors).length === 0) {
-        const result = await userService.registerUser(formData)
+        const result = await userService.registerService(formData)
+        console.log(result)
         if (result) {
           toast.success("Register succesfully", { autoClose: 3000 })
           setTimeout(() => navigate('/'), 3000)
@@ -125,6 +130,15 @@ function Register() {
                   </InputAdornment>
                 )
               }}
+            />
+            <TextField
+              label="Phone"
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              error={!!errors.phone}
+              helperText={errors.phone}
             />
             <Button type='submit' variant='contained' sx={{ backgroundColor: '#3f51b5', color: '#fff' }}>Register</Button>
           </Stack>

@@ -11,7 +11,7 @@ import ModalCustomer2 from "./ModalCustomer2"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import Bell from "./Bell"
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from '@mui/icons-material/Login'
 import { Cookie, Login } from "@mui/icons-material"
 import Register from "./Register"
 import { jwtDecode } from "jwt-decode"
@@ -25,8 +25,18 @@ const Header = () => {
         const loggedIn = checkAuthToken()
         setIsLoggedIn(loggedIn)
     }, [])
+    const handleLogout = () => {
+        try {
+            //Call api logout 
+            Cookies.remove('accessToken')
+            setIsLoggedIn(false)
+            navigate('/login')
+        } catch (error) {
+            console.error('Logout failed', error)
+        }
+    }
     const checkAuthToken = () => {
-        const token = Cookies.get('accessToken') // Hoặc sessionStorage hoặc cookies
+        const token = Cookies.get('accessToken')
         if (!token) {
             return false // Token không tồn tại
         }
@@ -151,14 +161,9 @@ const Header = () => {
             <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: "#1DCBB6" }}>Tư Vấn Sức Khỏe Ngay</RightButton>
             <ModalCustomer2 open={isModalOpen} handleClose={closeModal} BackdropClick={closeModal} />
             <RightButton variant="contained" sx={{ backgroundColor: "#2320D4" }} >Tải Ứng Dụng Ngay</RightButton>
-            <Link to="/login" onClick={() => navigate('/login')}>
-                <MidButton variant="text" > <Login style={IconStyle} onClick={checkAuthToken} />
-                    {isLoggedIn ? 'Logout' : 'Login'}
-                </MidButton>
-            </Link>
-            <Link to="/register" onClick={() => navigate('/register')}>
+            <Link to="/login" onClick={isLoggedIn ? handleLogout : () => navigate('/login')}>
                 <MidButton variant="text" > <Login style={IconStyle} />
-                    Register
+                    {isLoggedIn ? 'Logout' : 'Login'}
                 </MidButton>
             </Link>
         </Box>

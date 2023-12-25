@@ -4,7 +4,9 @@ import Header from '../components/common/Header'
 import Detail from '../components/common/DetailSpecialty/Detail'
 import Footer from "../components/common/Footer"
 
+
 const DetailSpecialty = () => {
+
     return (
         <Box>
             <HeaderCovid />

@@ -8,9 +8,9 @@ import Sidebar from '../Sidebar'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
-import { specialtyService } from '../../../../services/specialtyService'
 import Cookies from 'js-cookie'
 import { ToastContainer, toast } from 'react-toastify'
+import specialtyService from '../../../../services/specialtyService'
 
 const ManageClinic = () => {
     const [clinics, setClinics] = useState([])

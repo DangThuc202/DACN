@@ -1,31 +1,26 @@
-import { Box, Modal } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setAuthModalOpen } from "../../redux/feartures/authModalSlice";
-import Login from "./Login";
-import ChangePassword from "./ChangePassword";
-import bg1 from "../../image/bg1.svg";
-import LogoutIcon from '@mui/icons-material/Logout';
+import { Box, Modal } from "@mui/material"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setAuthModalOpen } from "../../redux/feartures/authModalSlice"
+import Login from "./Login"
+import ChangePassword from "./ChangePassword"
+import bg1 from "../../image/bg1.svg"
+import LogoutIcon from '@mui/icons-material/Logout'
 
 const actionStates = {
     login: "login",
     changePassword: "changePassword",
-};
+}
 
 const AuthModal = () => {
-    const { authModalOpen } = useSelector((state) => state.authModal);
-
-    // const dispatch = useDispatch();
-
-    const [action, setAction] = useState(actionStates.login);
+    const { authModalOpen } = useSelector((state) => state.authModal)
+    const [action, setAction] = useState(actionStates.login)
 
     useEffect(() => {
-        if (authModalOpen) setAction(actionStates.login);
-    }, [authModalOpen]);
+        if (authModalOpen) setAction(actionStates.login)
+    }, [authModalOpen])
 
-    // const handleClose = () => dispatch(setAuthModalOpen(false));
-
-    const switchAuthState = (state) => setAction(state);
+    const switchAuthState = (state) => setAction(state)
 
     return (
         <Box sx={{
@@ -77,7 +72,7 @@ const AuthModal = () => {
             </Box>
         </Box>
 
-    );
-};
+    )
+}
 
-export default AuthModal;
+export default AuthModal
