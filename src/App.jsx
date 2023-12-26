@@ -1,11 +1,11 @@
 import './App.css'
 import HomePage from './pages/HomePage'
-import DoctorPage from "./pages/DoctorPage"
+import DoctorPage from './pages/DoctorPage'
 import SpecialtyPage from './pages/SpecialtyPage'
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import AuthModal from './components/common/AuthModal'
 import AdminPage from './pages/AdminPage'
-import { path } from "./utils/constant"
+import { path } from './utils/constant'
 import ManageDoctor from './components/common/AdminPage/Dashboard/ManageDoctor'
 import ManageClinic from './components/common/AdminPage/Dashboard/ManageClinic'
 import ManagePatient from './components/common/AdminPage/Dashboard/ManagePatient'
@@ -16,6 +16,7 @@ import DetailDoctor from './pages/DetailDoctor'
 import DetailSpecialty from './pages/DetailSpecialty'
 import NotFoundPage from './components/NotFoundPage'
 import DoctorDetailPage from './components/common/DoctorPage/DoctorDetailPage'
+import EmailVerification from './components/auth/EmailVerification'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route index path={path.HOME} exact element={<HomePage />} />
           <Route path={path.SPECIALTY} element={<SpecialtyPage />} />
           <Route path={path.DOCTORS} element={<DoctorPage />} />
+          {/* Authentication */}
           <Route path={path.LOGIN} element={<AuthModal />} />
           <Route path={path.REGISTER} element={<Register />} />
           <Route path={path.ADMIN} element={<ManageDashboard />} />
@@ -35,11 +37,12 @@ const App = () => {
           {/* Thông tin chuyên khoa */}
           <Route path={path.DETAILSPECIALTY} element={<DetailSpecialty />} />
           <Route path={path.DOCTOR_DETAIL} element={<DetailDoctor />} />
+          {/* Xác thực email */}
+          <Route path={path.VERIFY_EMAIl} element={<EmailVerification />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
-
   )
 }
 

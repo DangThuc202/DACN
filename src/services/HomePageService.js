@@ -1,12 +1,11 @@
-import axios from "axios"
+import axios from 'axios'
 const BASE_URL = 'http://localhost:3001/api'
 
 const homePageService = {
   getDoctors: async () => {
     try {
       const respone = await axios.get(`${BASE_URL}/doctors/homePage`)
-      console.log(respone)
-      return respone.data
+      return respone.data.data
     } catch (error) {
       console.error(error)
       throw error

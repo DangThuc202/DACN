@@ -1,5 +1,19 @@
 import React, { useState } from 'react'
-import { Box, Button, Card, Stack, TextField, Typography, InputAdornment, IconButton } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  Stack,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  FormControlLabel,
+  RadioGroup,
+  FormLabel,
+  Radio
+} from '@mui/material'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import userService from '../../services/UserServices'
@@ -8,20 +22,23 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 function Register() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
+    phoneNumber: '',
+    address: '',
+    gender: ''
   })
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({})
-  const validate = () => {
+  const validate = (formValues) => {
     let errors = {}
-    if (!formData.first_name) {
-      errors.first_name = 'First name is required'
+    if (!formData.firstName) {
+      errors.firstName = 'First name is required'
     }
-    if (!formData.last_name) {
-      errors.last_name = 'Last name is required'
+    if (!formData.lastName) {
+      errors.lastName = 'Last name is required'
     }
     if (!formData.email) {
       errors.email = 'Email is required'
@@ -31,33 +48,34 @@ function Register() {
     if (!formData.password) {
       errors.password = 'Password is required'
     }
-    if (!formData.phone) {
-      errors.phone = 'Phone is required'
+    if (!formData.phoneNumber) {
+      errors.phoneNumber = 'Phone is required'
+    }
+    if (!formData.address) {
+      errors.address = 'Address is required'
     }
     return errors
-
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const validationErrors = validate()
+    const validationErrors = validate(formData)
     setErrors(validationErrors)
     try {
       if (Object.keys(validationErrors).length === 0) {
         const result = await userService.registerService(formData)
-        console.log(result)
         if (result) {
-          toast.success("Register succesfully", { autoClose: 3000 })
+          toast.success('Register succesfully', { autoClose: 3000 })
           setTimeout(() => navigate('/'), 3000)
         }
       } else {
-        toast.error("Please input all fields", { autoClose: 3000 })
+        toast.error('Please input all fields', { autoClose: 3000 })
       }
     } catch (error) {
       console.error('Error registering user:', error)
       if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message)
       } else {
-        toast.error("An unexpected error occurred.")
+        toast.error('An unexpected error occurred.')
       }
     }
   }
@@ -72,33 +90,35 @@ function Register() {
     const { name, value } = event.target
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value
     }))
   }
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
       <Card sx={{ padding: '20px', width: '400px' }}>
-        <Typography variant='h4' textAlign="center" mb={5}>ĐĂNG KÝ TÀI KHOẢN</Typography>
+        <Typography variant="h4" textAlign="center" mb={5}>
+          ĐĂNG KÝ TÀI KHOẢN
+        </Typography>
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>
             <TextField
               label="First Name"
               type="text"
-              name="first_name"
-              value={formData.first_name}
+              name="firstName"
+              value={formData.firstName}
               onChange={handleInputChange}
-              error={!!errors.first_name}
-              helperText={errors.first_name}
+              error={!!errors.firstName}
+              helperText={errors.firstName}
             />
             <TextField
               label="Last Name"
               type="text"
-              name="last_name"
-              value={formData.last_name}
+              name="lastName"
+              value={formData.lastName}
               onChange={handleInputChange}
-              error={!!errors.last_name}
-              helperText={errors.last_name}
+              error={!!errors.lastName}
+              helperText={errors.lastName}
             />
             <TextField
               label="Email"
@@ -134,13 +154,33 @@ function Register() {
             <TextField
               label="Phone"
               type="text"
-              name="phone"
-              value={formData.phone}
+              name="phoneNumber"
+              value={formData.phoneNumber}
               onChange={handleInputChange}
-              error={!!errors.phone}
-              helperText={errors.phone}
+              error={!!errors.phoneNumber}
+              helperText={errors.phoneNumber}
             />
-            <Button type='submit' variant='contained' sx={{ backgroundColor: '#3f51b5', color: '#fff' }}>Register</Button>
+            <TextField
+              label="Address"
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+              error={!!errors.address}
+              helperText={errors.address}
+            />
+            <FormControl component="fieldset" error={!!errors.gender}>
+              <FormLabel component="legend">Gender</FormLabel>
+              <RadioGroup name="gender" value={formData.gender} onChange={handleInputChange}>
+                <FormControlLabel value="Male" control={<Radio />} label="Male" />
+                <FormControlLabel value="Female" control={<Radio />} label="Female" />
+                <FormControlLabel value="Other" control={<Radio />} label="Other" />
+              </RadioGroup>
+              {errors.gender && <p style={{ color: 'red' }}>{errors.gender}</p>}
+            </FormControl>
+            <Button type="submit" variant="contained" sx={{ backgroundColor: '#3f51b5', color: '#fff' }}>
+              Register
+            </Button>
           </Stack>
         </form>
       </Card>

@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -24,11 +23,21 @@ const DoctorDetailPage = () => {
   return (
     <div style={{ margin: '0 auto', maxWidth: '800px', padding: '20px' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Doctor Detail</h1>
-      <p><strong>ID:</strong> {id}</p>
-      <p><strong>Name:</strong> {doctor.user_id.first_name} {doctor.user_id.last_name}</p>
-      <p><strong>Specialty:</strong> {doctor.specialty_id.name}</p>
-      <p><strong>Phone:</strong> {doctor.user_id.phone}</p>
-      <p><strong>Description:</strong> {doctor.description}</p>
+      <p>
+        <strong>ID:</strong> {id}
+      </p>
+      <p>
+        <strong>Name:</strong> {doctor.user_id.first_name} {doctor.user_id.last_name}
+      </p>
+      <p>
+        <strong>Specialty:</strong> {doctor.specialty_id.name}
+      </p>
+      <p>
+        <strong>Phone:</strong> {doctor.user_id.phone}
+      </p>
+      <p>
+        <strong>Description:</strong> {doctor.description}
+      </p>
     </div>
   )
 }

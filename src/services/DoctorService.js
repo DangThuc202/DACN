@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 const BASE_URL = 'http://localhost:3001/api'
 export class DoctorService {
   static async getDoctors() {
@@ -21,5 +20,14 @@ export class DoctorService {
       throw error
     }
   }
+  static async getDoctorsHomePage() {
+    try {
+      const response = await axios.get(`${BASE_URL}/doctors/homePage`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error('Error fetching data: ', error)
+      throw error
+    }
+  }
 }
-
