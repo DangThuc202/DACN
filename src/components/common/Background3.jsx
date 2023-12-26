@@ -36,7 +36,7 @@ const Background3 = () => {
           <Typography style={typoStyle}>
             Nhà thuốc <br /> trực tuyến
           </Typography>
-          <img src={img2_bg3} />
+          <img alt='' src={img2_bg3} />
         </Box>
         <a href="/doingubacsi">
           <Box sx={{ backgroundColor: '#f2ddde' }} style={boxStyle}>

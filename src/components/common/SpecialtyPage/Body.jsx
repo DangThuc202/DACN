@@ -1,10 +1,23 @@
 import { Box, Typography } from '@mui/material'
-import vatlitrilieu from '../../../image/vatlitrilieu.webp'
 import { useEffect, useState } from 'react'
 import specialtyService from '../../../services/specialtyService'
-import { Link, Route } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Body = () => {
+  const [specialties, setSpecialties] = useState([])
+  const navigate = useNavigate()
+  useEffect(() => {
+    specialtyService
+      .getSpecialties()
+      .then((specialties) => {
+        console.log(specialties)
+        setSpecialties(specialties)
+      })
+      .catch((error) => {
+        console.error('Error fetching and parsing data', error)
+      })
+  }, [])
+
   const itemStyle = {
     width: '150px',
     padding: '5px',
@@ -17,18 +30,7 @@ const Body = () => {
       cursor: 'pointer'
     }
   }
-  const [specialties, setSpecialties] = useState([])
-  useEffect(() => {
-    specialtyService
-      .getSpecialties()
-      .then((specialties) => {
-        console.log(specialties)
-        setSpecialties(specialties)
-      })
-      .catch((error) => {
-        console.error('Error fetching and parsing data', error)
-      })
-  }, [])
+
   return (
     <Box style={{ margin: '50px 100px' }}>
       <Typography variant="h4" sx={{ textAlign: 'center', fontWeight: '700' }}>
@@ -45,9 +47,10 @@ const Body = () => {
       >
         {Array.isArray(specialties) &&
           specialties.map((specialty, index) => (
-            <Link to={`/thongtinchuyenkhoa/${specialty._id}`} key={index} style={{ textDecoration: 'none' }}>
+            <Link to={`/thongtinchuyenkhoa/${specialty._id}`} onChange={() => navigate(`/thongtinchuyenkhoa/${specialty._id}`)}
+              key={index} style={{ textDecoration: 'none' }}>
               <Box key={index} sx={itemStyle}>
-                <img src={specialty.image} style={{ width: '64px', height: '64px' }} />
+                <img alt='' src={specialty.image} style={{ width: '64px', height: '64px' }} />
                 <Typography>{specialty.name}</Typography>
               </Box>
             </Link>

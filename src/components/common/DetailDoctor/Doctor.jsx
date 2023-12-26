@@ -2,8 +2,8 @@ import { Box, Avatar, Typography, Stack } from '@mui/material'
 import test from '../../../image/test.jpg'
 import ReportIcon from '@mui/icons-material/Report'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router'
+import homePageService from '../../../services/homePageService'
 
 const Doctor = () => {
   const { id } = useParams()
@@ -11,9 +11,8 @@ const Doctor = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/doctor/${id}`)
-        console.log(response.data.data)
-        setDoctor(response.data.data)
+        const response = await homePageService.getDoctorById(id)
+        setDoctor(response)
       } catch (error) {
         console.error('Error fetching data: ', error)
       }
@@ -21,7 +20,7 @@ const Doctor = () => {
     fetchData()
   }, [id])
   if (!doctor) {
-    return <div>Loading...</div>
+    return <div>Đang load....</div>
   }
   return (
     <Box>
@@ -31,14 +30,14 @@ const Doctor = () => {
           display: 'flex'
         }}
       >
-        <Avatar src={test} style={{ height: '150px', width: '150px', marginRight: '50px' }} />
+        <Avatar src={doctor.image} style={{ height: '150px', width: '150px', marginRight: '50px' }} />
         <Stack spacing={2} mt={2}>
           <Box>
             <Typography variant="h5" fontWeight="700">
-              {doctor.user_id.first_name} {doctor.user_id.last_name}
+              {doctor.name}
             </Typography>
             <Typography fontWeight="700" ml={3}>
-              Với <span style={{ color: 'red' }}>23</span> năm kinh nghiệm{' '}
+              Với <span style={{ color: 'red' }}>10</span> năm kinh nghiệm{' '}
             </Typography>
           </Box>
           <Box display="flex">
@@ -55,13 +54,13 @@ const Doctor = () => {
             </Box>
             <Box ml={2}>
               <Typography fontWeight="700" color="blue">
-                {doctor.specialty_id.name}{' '}
+                {doctor.specialty?.name}{' '}
               </Typography>
               <Typography fontWeight="700" color="blue">
                 Bác sĩ
               </Typography>
               <Typography fontWeight="700" color="blue">
-                {doctor.clinic_id.name}{' '}
+                {doctor.clinic?.name}{' '}
               </Typography>
             </Box>
           </Box>

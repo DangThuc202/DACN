@@ -1,14 +1,15 @@
 import bg2 from '../../image/bg2.svg'
-import { Box, Typography, Stack } from '@mui/material'
-import { useState } from 'react'
+import { Box, Typography, Stack, Slide } from '@mui/material'
 import ExploreBg2_1 from './ExploreBg2_1'
 import ExploreBg2_2 from './ExploreBg2_2'
 import ExploreBg2_3 from './ExploreBg2_3'
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 const Background2 = () => {
   return (
     <Box sx={{ position: 'relative' }}>
-      <img style={{ width: '100%', height: '850px', position: 'relative' }} src={bg2} />
+      <img alt="" style={{ width: '100%', height: '850px', position: 'relative' }} src={bg2} />
       <Box
         sx={{
           position: 'absolute',
@@ -26,13 +27,14 @@ const Background2 = () => {
         >
           Khám phá các phòng khám
         </Typography>
-        <Stack direction="row" spacing={5}>
-          <ExploreBg2_1 />
-          <ExploreBg2_2 />
-          <ExploreBg2_3 />
+        <Stack direction="row" spacing={3}>
+          <Box><ExploreBg2_1 /></Box>
+          <Box><ExploreBg2_2 /></Box>
+          <Box><ExploreBg2_3 /></Box>
         </Stack>
-      </Box>
-    </Box>
+
+      </Box >
+    </Box >
   )
 }
 

@@ -29,7 +29,7 @@ const Background = () => {
         <Doctor />
         <Time />
         <Introduce />
-        <Booking />
+        {/* <Booking /> */}
       </Box>
     </Box>
   )

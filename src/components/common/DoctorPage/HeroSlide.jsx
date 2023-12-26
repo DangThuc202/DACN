@@ -1,11 +1,10 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Unstable_Grid2'
-import test from '../../../image/test.jpg'
 import { Typography } from '@mui/material'
 import place from '../../../image/DoctorPage_img/place.svg'
 import exp from '../../../image/DoctorPage_img/exp.svg'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import homePageService from './../../../services/homePageService'
 
 const HeroSlide = () => {
@@ -16,7 +15,6 @@ const HeroSlide = () => {
     homePageService
       .getDoctors()
       .then((doctors) => {
-        console.log(doctors)
         setDoctors(doctors)
       })
       .catch((error) => {
@@ -43,7 +41,6 @@ const HeroSlide = () => {
     justifyContent: 'center',
     marginRight: '20px'
   }
-
   return (
     <Box>
       <Grid container spacing={3}>
@@ -62,7 +59,7 @@ const HeroSlide = () => {
               <Box
                 sx={{
                   height: '230px',
-                  backgroundImage: `url(${test})`,
+                  backgroundImage: `url(${doctor.image})`,
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: 'contain'
@@ -83,7 +80,7 @@ const HeroSlide = () => {
               </Box>
               <Box backgroundColor="rgb(227 245 233)" sx={contentStyle}>
                 <Box sx={iconStyle}>
-                  <img style={{ width: '30px' }} src={place} />
+                  <img alt='Avatar' style={{ width: '30px' }} src={place} />
                 </Box>
                 <Box sx={{ width: '260px' }}>
                   <Typography>

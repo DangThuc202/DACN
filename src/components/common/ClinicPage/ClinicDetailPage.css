@@ -1,0 +1,27 @@
+.clinic-detail-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.clinic-name {
+  font-size: 2rem;
+  color: #2a2a2a;
+}
+
+.clinic-description {
+  font-size: 1rem;
+  color: #4a4a4a;
+  margin-bottom: 2rem;
+}
+
+.clinic-services .service {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.clinic-hours,
+.clinic-contact {
+  margin-bottom: 1rem;
+}

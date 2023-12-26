@@ -20,9 +20,38 @@ const homePageService = {
       throw error
     }
   },
-  getSpecialtyById: async (id) => {
+  getSpecialtiesByIDHomePage: async (id) => {
     try {
-      const respone = await axios.get(`${BASE_URL}/specialty/${id}`)
+      const respone = await axios.get(`${BASE_URL}/specialties-homepage/${id}`)
+      return respone.data.data
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  },
+  getDoctorById: async (id) => {
+    try {
+      console.log(id)
+      const respone = await axios.get(`${BASE_URL}/doctors/homePage/${id}`)
+      console.log(respone.data.data)
+      return respone.data.data
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  },
+  getClinicsHomePage: async () => {
+    try {
+      const respone = await axios.get(`${BASE_URL}/clinics/homePage`)
+      return respone.data.data
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  },
+  getSpecialtiesHomePage: async () => {
+    try {
+      const respone = await axios.get(`${BASE_URL}/specialties-homepage`)
       return respone.data.data
     } catch (error) {
       console.error(error)

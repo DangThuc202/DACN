@@ -11,11 +11,10 @@ import ModalCustomer2 from './ModalCustomer2'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Bell from './Bell'
-import LoginIcon from '@mui/icons-material/Login'
-import { Cookie, Login } from '@mui/icons-material'
-import Register from './Register'
+import { Login } from '@mui/icons-material'
 import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
+
 const Header = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -140,18 +139,18 @@ const Header = () => {
             Nhà Thuốc Jio
           </MidButton>
         </a>
-        <Link to="/phongkham" onClick={() => navigate('/phongkham')}>
+        <Link to="/chuyenkhoa" onClick={() => navigate('/chuyenkhoa')}>
           <MidButton variant="text">
             {' '}
             <MedicalInformationIcon style={IconStyle} />
-            Phòng khám
+            Chuyên khoa
           </MidButton>
         </Link>
         <Link to="/phongkham" onClick={() => navigate('/phongkham')}>
           <MidButton variant="text">
             {' '}
             <MedicalInformationIcon style={IconStyle} />
-            Chuyên khoa
+            Phòng khám
           </MidButton>
         </Link>
         <Link to="/doingubacsi" onClick={() => navigate('/doingubacsi')}>

@@ -1,0 +1,40 @@
+.clinic-page {
+  padding: 2rem;
+  text-align: center;
+}
+
+.page-title {
+  margin-bottom: 1rem;
+}
+
+.specialty-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.specialty-card {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.specialty-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.specialty-name {
+  color: #333;
+  padding: 0.5rem;
+}
+
+.specialty-description {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}

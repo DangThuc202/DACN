@@ -3,7 +3,7 @@ import explore1 from '../../image/explore1.jpg'
 import PlaceIcon from '@mui/icons-material/Place'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 
-const ExploreBg2_1 = () => {
+const ExploreBackground = () => {
   const BtnStyle = {
     height: 'auto',
     width: 'auto',
@@ -101,4 +101,4 @@ const ExploreBg2_1 = () => {
   )
 }
 
-export default ExploreBg2_1
+export default ExploreBackground

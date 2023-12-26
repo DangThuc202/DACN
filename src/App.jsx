@@ -17,6 +17,9 @@ import DetailSpecialty from './pages/DetailSpecialty'
 import NotFoundPage from './components/NotFoundPage'
 import DoctorDetailPage from './components/common/DoctorPage/DoctorDetailPage'
 import EmailVerification from './components/auth/EmailVerification'
+import ClinicPage from './components/common/ClinicPage/ClinicPage'
+import ClinicDetailPage from './components/common/ClinicPage/ClinicDetailPage'
+import { Switch } from '@mui/material'
 
 const App = () => {
   return (
@@ -36,9 +39,12 @@ const App = () => {
           <Route path={path.MANAGEBOOKING} element={<ManageBooking />} />
           {/* Thông tin chuyên khoa */}
           <Route path={path.DETAILSPECIALTY} element={<DetailSpecialty />} />
+          {/* Thông tin bác sĩ */}
           <Route path={path.DOCTOR_DETAIL} element={<DetailDoctor />} />
           {/* Xác thực email */}
           <Route path={path.VERIFY_EMAIl} element={<EmailVerification />} />
+          <Route path={path.CLINIC} element={<ClinicPage />} />
+          <Route path={path.CLINIC_DETAIL} element={<ClinicDetailPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

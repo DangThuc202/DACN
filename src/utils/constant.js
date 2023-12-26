@@ -3,8 +3,8 @@ export const path = {
   LOGIN: '/login',
   REGISTER: '/register',
   SYSTEM: '/hethong',
-  SPECIALTY: '/phongkham',
-  SPECIALTY_DETAIL: '/phongkham/:id',
+  SPECIALTY: '/chuyenkhoa',
+  SPECIALTY_DETAIL: '/chuyenkhoa/:id',
   DOCTORS: '/doingubacsi',
   DOCTOR_DETAIL: '/doingubacsi/:id',
   ADMIN: '/admin/dashboard',
@@ -13,6 +13,7 @@ export const path = {
   MANAGEPATIENT: '/admin/manage-patient',
   MANAGEBOOKING: '/admin/quanlydatlich',
   DETAILSPECIALTY: '/thongtinchuyenkhoa/:id',
-  DETAIL_DOCTOR: '/thongtinbacsi',
-  VERIFY_EMAIl: '/verify-email:token'
+  VERIFY_EMAIl: '/verify-email:token',
+  CLINIC: '/phongkham',
+  CLINIC_DETAIL: '/phongkham/:id'
 }
