@@ -20,6 +20,7 @@ import EmailVerification from './components/auth/EmailVerification'
 import ClinicPage from './components/common/ClinicPage/ClinicPage'
 import ClinicDetailPage from './components/common/ClinicPage/ClinicDetailPage'
 import { Switch } from '@mui/material'
+import BlogPage from './components/common/Blog/BlogPage'
 
 const App = () => {
   return (
@@ -46,6 +47,7 @@ const App = () => {
           <Route path={path.CLINIC} element={<ClinicPage />} />
           <Route path={path.CLINIC_DETAIL} element={<ClinicDetailPage />} />
         </Route>
+        <Route path={path.BLOG} element={<BlogPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

@@ -14,6 +14,8 @@ import Bell from './Bell'
 import { Login } from '@mui/icons-material'
 import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
+import { path } from '../../../src/utils/constant'
+
 
 const Header = () => {
   const [isModalOpen, setModalOpen] = useState(false)
@@ -120,7 +122,7 @@ const Header = () => {
     >
       <img style={{ padding: '25px', zIndex: 100 }} src={logo} />
       <Stack direction="row" spacing={2} sx={{ marginLeft: '10px' }}>
-        <Link to="/" onClick={() => navigate('/')}>
+        <Link to={path.HOME} onClick={() => navigate(path.HOME)}>
           <MidButton variant="text">
             {' '}
             <HomeIcon style={IconStyle} />
@@ -139,32 +141,34 @@ const Header = () => {
             Nhà Thuốc Jio
           </MidButton>
         </a>
-        <Link to="/chuyenkhoa" onClick={() => navigate('/chuyenkhoa')}>
+        <Link to={path.SPECIALTY} onClick={() => navigate(path.SPECIALTY)}>
           <MidButton variant="text">
             {' '}
             <MedicalInformationIcon style={IconStyle} />
             Chuyên khoa
           </MidButton>
         </Link>
-        <Link to="/phongkham" onClick={() => navigate('/phongkham')}>
+        <Link to={path.CLINIC} onClick={() => navigate(path.CLINIC)}>
           <MidButton variant="text">
             {' '}
             <MedicalInformationIcon style={IconStyle} />
             Phòng khám
           </MidButton>
         </Link>
-        <Link to="/doingubacsi" onClick={() => navigate('/doingubacsi')}>
+        <Link to={path.DOCTORS} onClick={() => navigate(path.DOCTORS)}>
           <MidButton variant="text">
             {' '}
             <PeopleAltIcon style={IconStyle} />
             Đội Ngũ Bác Sĩ
           </MidButton>
         </Link>
-        <MidButton variant="text">
-          {' '}
-          <NewspaperIcon style={IconStyle} />
-          Tin Tức
-        </MidButton>
+        <Link to={path.BLOG}>
+          <MidButton variant="text">
+            {' '}
+            <NewspaperIcon style={IconStyle} />
+            Tin Tức
+          </MidButton>
+        </Link>
         <Bell />
       </Stack>
       <RightButton onClick={openModal} variant="contained" sx={{ backgroundColor: '#1DCBB6' }}>

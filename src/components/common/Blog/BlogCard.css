@@ -1,0 +1,44 @@
+.blog-post {
+  background-color: #f3f1f1;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 16px;
+  padding: 20px;
+  max-width: 320px;
+}
+
+.blog-post h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.blog-post p {
+  color: #666;
+  line-height: 1.6; /* khoảng cách giữa các dòng */
+}
+
+/* Thêm một lớp cho admin để làm nổi bật */
+.blog-post .admin {
+  font-weight: bold; /* in đậm tên admin */
+  color: #007bff; /* màu chữ cho admin */
+  font-size: 0.9rem; /* kích thước font nhỏ hơn một chút */
+}
+.blog-post {
+  /* các thuộc tính cũ */
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Thêm hiệu ứng chuyển đổi mượt mà */
+}
+
+.blog-post:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tăng độ bóng đổ khi hover */
+  transform: translateY(-5px); /* Nhấc card lên một chút khi hover */
+}

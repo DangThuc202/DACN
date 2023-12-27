@@ -57,6 +57,24 @@ const homePageService = {
       console.error(error)
       throw error
     }
+  },
+  getClinicsHomePageById: async (id) => {
+    try {
+      const respone = await axios.get(`${BASE_URL}/clinics/homePage/${id}`)
+      return respone.data.data
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  },
+  getBlogsHomePage: async () => {
+    try {
+      const reponse = await axios.get(`${BASE_URL}/blogs`)
+      return reponse.data.data
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
   }
 }
 export default homePageService

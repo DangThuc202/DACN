@@ -1,0 +1,26 @@
+.specialty-container {
+  width: 100%;
+  height: auto;
+}
+
+.specialty-image {
+  height: 500px;
+  width: 50%;
+  display: block;
+  margin: 40px auto;
+}
+
+.specialty-header {
+  text-align: center;
+  font-weight: 700;
+}
+
+.specialty-description {
+  text-indent: 50px;
+  line-height: 30px;
+  font-size: 20px;
+}
+
+.specialty-stack {
+  margin: 50px 100px;
+}

@@ -15,5 +15,7 @@ export const path = {
   DETAILSPECIALTY: '/thongtinchuyenkhoa/:id',
   VERIFY_EMAIl: '/verify-email:token',
   CLINIC: '/phongkham',
-  CLINIC_DETAIL: '/phongkham/:id'
+  CLINIC_DETAIL: '/phongkham/:id',
+  BLOG: '/blogs',
+  BLOG_DETAIL: '/blogs/:id'
 }
