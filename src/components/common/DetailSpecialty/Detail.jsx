@@ -21,7 +21,7 @@ const Detail = () => {
   return (
     <Box sx={{ width: '100%', height: 'auto' }}>
       <img
-        alt='img'
+        alt="img"
         src={specialty.image}
         style={{
           height: '500px',

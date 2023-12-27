@@ -80,7 +80,7 @@ const HeroSlide = () => {
               </Box>
               <Box backgroundColor="rgb(227 245 233)" sx={contentStyle}>
                 <Box sx={iconStyle}>
-                  <img alt='Avatar' style={{ width: '30px' }} src={place} />
+                  <img alt="Avatar" style={{ width: '30px' }} src={place} />
                 </Box>
                 <Box sx={{ width: '260px' }}>
                   <Typography>

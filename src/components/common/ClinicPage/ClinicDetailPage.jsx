@@ -29,7 +29,6 @@ const ClinicDetailPage = () => {
       <h1 className="clinic-name">{clinic.name}</h1>
       <p className="clinic-description">{clinic.description}</p>
 
-
       <div className="clinic-services">
         {clinic.services.map((service, index) => (
           <div key={index} className="service">

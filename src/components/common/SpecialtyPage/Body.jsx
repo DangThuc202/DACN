@@ -47,10 +47,14 @@ const Body = () => {
       >
         {Array.isArray(specialties) &&
           specialties.map((specialty, index) => (
-            <Link to={`/thongtinchuyenkhoa/${specialty._id}`} onChange={() => navigate(`/thongtinchuyenkhoa/${specialty._id}`)}
-              key={index} style={{ textDecoration: 'none' }}>
+            <Link
+              to={`/thongtinchuyenkhoa/${specialty._id}`}
+              onChange={() => navigate(`/thongtinchuyenkhoa/${specialty._id}`)}
+              key={index}
+              style={{ textDecoration: 'none' }}
+            >
               <Box key={index} sx={itemStyle}>
-                <img alt='' src={specialty.image} style={{ width: '64px', height: '64px' }} />
+                <img alt="" src={specialty.image} style={{ width: '64px', height: '64px' }} />
                 <Typography>{specialty.name}</Typography>
               </Box>
             </Link>

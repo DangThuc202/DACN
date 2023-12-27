@@ -11,9 +11,7 @@ import Pay from '../DoctorPage/Pay'
 import homePageService from '../../../services/homePageService'
 import { Link } from 'react-router-dom'
 
-
 const ClinicPage = () => {
-
   const [clinics, setClinics] = useState([])
   useEffect(() => {
     const fetchClinics = async () => {
@@ -28,16 +26,14 @@ const ClinicPage = () => {
   }, [])
   const ClinicCard = ({ clinics }) => {
     return (
-      < Link to={`/phongkham/${clinics._id}`
-      } className='clinic-link' >
+      <Link to={`/phongkham/${clinics._id}`} className="clinic-link">
         <div className="clinic-card">
           <img src={clinics.image} alt={clinics.name} className="clinic-image" />
           <h3 className="clinic-name">{clinics.name}</h3>
           <p className="clinic-address">{clinics.address}</p>
           <p className="clinic-description">{clinics.description}</p>
-
         </div>
-      </Link >
+      </Link>
     )
   }
   return (
@@ -45,11 +41,9 @@ const ClinicPage = () => {
       <HeaderCovid />
       <Header />
       <div className="clinic-page">
-        <h1 className="page-title">
-          THÔNG TIN CÁC PHÒNG KHÁM CỦA CHÚNG TÔI
-        </h1>
+        <h1 className="page-title">THÔNG TIN CÁC PHÒNG KHÁM CỦA CHÚNG TÔI</h1>
         <div className="clinic-list">
-          {clinics.map(clinic => (
+          {clinics.map((clinic) => (
             <ClinicCard key={clinic.id} clinics={clinic} />
           ))}
         </div>
